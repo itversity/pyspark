@@ -1,0 +1,33 @@
+- file: cca175_intro
+  numbered: true
+
+- part: Apache Spark using Python
+  chapters:
+  - file: spark-python/01_getting_started
+  - file: spark-python/02_quick_recap_of_python
+  - file: spark-python/03_data_processing_overview
+  - file: spark-python/04_processing_column_data
+  - file: spark-python/05_basic_transformations
+  - file: spark-python/06_joining_data_sets
+  - file: spark-python/07_windowing_functions
+  - file: spark-python/08_spark_metastore
+  
+- part: Apache Spark using Scala
+  chapters:
+  - file: spark-scala/01_getting_started
+  - file: spark-scala/02_quick_recap_of_scala
+  - file: spark-scala/03_data_processing_overview
+  - file: spark-scala/04_processing_column_data
+  - file: spark-scala/05_basic_transformations
+  - file: spark-scala/06_joining_data_sets
+  - file: spark-scala/07_windowing_functions
+  - file: spark-scala/08_spark_metastore
+
+- part: Apache Spark using SQL
+  chapters:
+    - file: spark-sql/01_getting_started
+    - file: spark-sql/02_basic_transformations
+    - file: spark-sql/03_basic_ddl_and_dml
+    - file: spark-sql/04_dml_and_partitioning
+    - file: spark-sql/05_predefined_functions
+    - file: spark-sql/06_windowing_functions

@@ -1,0 +1,4 @@
+exclude_patterns: [_build, README]
+
+execute:
+  execute_notebooks         : off
