@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exploring Spark Catalog &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creating Metastore Tables using catalog" href="04_creating_metastore_tables_using_catalog.html" />
+    <link rel="prev" title="Overview of Spark Metastore" href="02_overview_of_spark_metastore.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_spark_metastore.html">
+   Spark Metastore
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_overview_of_spark_metastore.html">
+     Overview of Spark Metastore
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Exploring Spark Catalog
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_creating_metastore_tables_using_catalog.html">
+     Creating Metastore Tables using catalog
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_inferring_schema_for_tables.html">
+     Inferring Schema for Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_define_schema_for_tables_using_structtype.html">
+     Define Schema for Tables using StructType
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_inserting_into_existing_tables.html">
+     Inserting into Existing Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08_read_and_process_data_from_metastore_tables.html">
+     Read and Process data from Metastore Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_creating_partitioned_tables.html">
+     Creating Partitioned Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_saving_as_partitioned_tables-Copy1.html">
+     Saving as Partitioned Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11_creating_temp_views.html">
+     Creating Temp Views
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12_using_spark_sql.html">
+     Using Spark SQL
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/08_spark_metastore/03_exploring_spark_catalog.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F08_spark_metastore/03_exploring_spark_catalog.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/08_spark_metastore/03_exploring_spark_catalog.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/08_spark_metastore/03_exploring_spark_catalog.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="exploring-spark-catalog">
+<h1>Exploring Spark Catalog<a class="headerlink" href="#exploring-spark-catalog" title="Permalink to this headline">¶</a></h1>
+<p>Let us get an overview of Spark Catalog to manage Spark Metastore tables as well as temporary views.</p>
+<ul class="simple">
+<li><p>Let us say <code class="docutils literal notranslate"><span class="pre">spark</span></code> is of type <code class="docutils literal notranslate"><span class="pre">SparkSession</span></code>. There is an attribute as part of <code class="docutils literal notranslate"><span class="pre">spark</span></code> called as catalog and it is of type pyspark.sql.catalog.Catalog.</p></li>
+<li><p>We can access catalog using <code class="docutils literal notranslate"><span class="pre">spark.catalog</span></code>.</p></li>
+<li><p>We can permanently or temporarily create tables or views on top of data in a Data Frame.</p></li>
+<li><p>Metadata such as table names, column names, data types etc for the permanent tables or views will be stored in Metastore. We can access the metadata using <code class="docutils literal notranslate"><span class="pre">spark.catalog</span></code> which is exposed as part of SparkSession object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spark.catalog</span></code> also provide us the details related to temporary views that are being created. Metadata of these temporary views will not be stored in Spark Metastore.</p></li>
+<li><p>Permanent tables are typically created using databases in spark metastore. If not specified, the tables will be created in <strong>default</strong> database.</p></li>
+<li><p>There are several methods that are part of <code class="docutils literal notranslate"><span class="pre">spark.catalog</span></code>. We will explore them in the later topics.</p></li>
+<li><p>Following are some of the tasks that can be performed using <code class="docutils literal notranslate"><span class="pre">spark.catalog</span></code> object.</p>
+<ul>
+<li><p>Check current database and switch to different databases.</p></li>
+<li><p>Create permanent table in metastore.</p></li>
+<li><p>Create or drop temporary views.</p></li>
+<li><p>Register functions.</p></li>
+</ul>
+</li>
+<li><p>All the above tasks can be performed using SQL style commands passed to <code class="docutils literal notranslate"><span class="pre">spark.sql</span></code>.</p></li>
+</ul>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Spark Metastore&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">catalog</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyspark.sql.catalog.Catalog at 0x7fbe54f639e8&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">catalog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on Catalog in module pyspark.sql.catalog object:
+
+class Catalog(builtins.object)
+ |  User-facing catalog API, accessible through `SparkSession.catalog`.
+ |  
+ |  This is a thin wrapper around its Scala implementation org.apache.spark.sql.catalog.Catalog.
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(self, sparkSession)
+ |      Create a new Catalog that wraps the underlying JVM object.
+ |  
+ |  cacheTable(self, tableName)
+ |      Caches the specified table in-memory.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  clearCache(self)
+ |      Removes all cached tables from the in-memory cache.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  createExternalTable(self, tableName, path=None, source=None, schema=None, **options)
+ |      Creates a table based on the dataset in a data source.
+ |      
+ |      It returns the DataFrame associated with the external table.
+ |      
+ |      The data source is specified by the ``source`` and a set of ``options``.
+ |      If ``source`` is not specified, the default data source configured by
+ |      ``spark.sql.sources.default`` will be used.
+ |      
+ |      Optionally, a schema can be provided as the schema of the returned :class:`DataFrame` and
+ |      created external table.
+ |      
+ |      :return: :class:`DataFrame`
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  createTable(self, tableName, path=None, source=None, schema=None, **options)
+ |      Creates a table based on the dataset in a data source.
+ |      
+ |      It returns the DataFrame associated with the table.
+ |      
+ |      The data source is specified by the ``source`` and a set of ``options``.
+ |      If ``source`` is not specified, the default data source configured by
+ |      ``spark.sql.sources.default`` will be used. When ``path`` is specified, an external table is
+ |      created from the data at the given path. Otherwise a managed table is created.
+ |      
+ |      Optionally, a schema can be provided as the schema of the returned :class:`DataFrame` and
+ |      created table.
+ |      
+ |      :return: :class:`DataFrame`
+ |      
+ |      .. versionadded:: 2.2
+ |  
+ |  currentDatabase(self)
+ |      Returns the current default database in this session.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  dropGlobalTempView(self, viewName)
+ |      Drops the global temporary view with the given view name in the catalog.
+ |      If the view has been cached before, then it will also be uncached.
+ |      Returns true if this view is dropped successfully, false otherwise.
+ |      
+ |      &gt;&gt;&gt; spark.createDataFrame([(1, 1)]).createGlobalTempView(&quot;my_table&quot;)
+ |      &gt;&gt;&gt; spark.table(&quot;global_temp.my_table&quot;).collect()
+ |      [Row(_1=1, _2=1)]
+ |      &gt;&gt;&gt; spark.catalog.dropGlobalTempView(&quot;my_table&quot;)
+ |      &gt;&gt;&gt; spark.table(&quot;global_temp.my_table&quot;) # doctest: +IGNORE_EXCEPTION_DETAIL
+ |      Traceback (most recent call last):
+ |          ...
+ |      AnalysisException: ...
+ |      
+ |      .. versionadded:: 2.1
+ |  
+ |  dropTempView(self, viewName)
+ |      Drops the local temporary view with the given view name in the catalog.
+ |      If the view has been cached before, then it will also be uncached.
+ |      Returns true if this view is dropped successfully, false otherwise.
+ |      
+ |      Note that, the return type of this method was None in Spark 2.0, but changed to Boolean
+ |      in Spark 2.1.
+ |      
+ |      &gt;&gt;&gt; spark.createDataFrame([(1, 1)]).createTempView(&quot;my_table&quot;)
+ |      &gt;&gt;&gt; spark.table(&quot;my_table&quot;).collect()
+ |      [Row(_1=1, _2=1)]
+ |      &gt;&gt;&gt; spark.catalog.dropTempView(&quot;my_table&quot;)
+ |      &gt;&gt;&gt; spark.table(&quot;my_table&quot;) # doctest: +IGNORE_EXCEPTION_DETAIL
+ |      Traceback (most recent call last):
+ |          ...
+ |      AnalysisException: ...
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  isCached(self, tableName)
+ |      Returns true if the table is currently cached in-memory.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  listColumns(self, tableName, dbName=None)
+ |      Returns a list of columns for the given table/view in the specified database.
+ |      
+ |      If no database is specified, the current database is used.
+ |      
+ |      Note: the order of arguments here is different from that of its JVM counterpart
+ |      because Python does not support method overloading.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  listDatabases(self)
+ |      Returns a list of databases available across all sessions.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  listFunctions(self, dbName=None)
+ |      Returns a list of functions registered in the specified database.
+ |      
+ |      If no database is specified, the current database is used.
+ |      This includes all temporary functions.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  listTables(self, dbName=None)
+ |      Returns a list of tables/views in the specified database.
+ |      
+ |      If no database is specified, the current database is used.
+ |      This includes all temporary views.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  recoverPartitions(self, tableName)
+ |      Recovers all the partitions of the given table and update the catalog.
+ |      
+ |      Only works with a partitioned table, and not a view.
+ |      
+ |      .. versionadded:: 2.1.1
+ |  
+ |  refreshByPath(self, path)
+ |      Invalidates and refreshes all the cached data (and the associated metadata) for any
+ |      DataFrame that contains the given data source path.
+ |      
+ |      .. versionadded:: 2.2.0
+ |  
+ |  refreshTable(self, tableName)
+ |      Invalidates and refreshes all the cached data and metadata of the given table.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  registerFunction(self, name, f, returnType=None)
+ |      An alias for :func:`spark.udf.register`.
+ |      See :meth:`pyspark.sql.UDFRegistration.register`.
+ |      
+ |      .. note:: Deprecated in 2.3.0. Use :func:`spark.udf.register` instead.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  setCurrentDatabase(self, dbName)
+ |      Sets the current default database in this session.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  uncacheTable(self, tableName)
+ |      Removes the specified table from the in-memory cache.
+ |      
+ |      .. versionadded:: 2.0
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./08_spark_metastore"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="02_overview_of_spark_metastore.html" title="previous page">Overview of Spark Metastore</a>
+    <a class='right-next' id="next-link" href="04_creating_metastore_tables_using_catalog.html" title="next page">Creating Metastore Tables using catalog</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

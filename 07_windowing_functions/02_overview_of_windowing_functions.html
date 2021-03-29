@@ -1,0 +1,880 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview of Windowing Functions &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Aggregate Functions" href="03_aggregate_functions.html" />
+    <link rel="prev" title="Windowing Functions" href="01_windowing_functions.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_windowing_functions.html">
+   Windowing Functions
+  </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Overview of Windowing Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_aggregate_functions.html">
+     Aggregate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_using_rowsBetween_and_rangeBetween.html">
+     Using rowsBetween and rangeBetween
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_ranking_functions.html">
+     Ranking Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_using_lead_or_lag.html">
+     Using LEAD or LAG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_using_first_and_last_functions.html">
+     Using first and last functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_aggregate_functions_examples.html">
+     Aggregate Functions Examples
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/07_windowing_functions/02_overview_of_windowing_functions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F07_windowing_functions/02_overview_of_windowing_functions.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/07_windowing_functions/02_overview_of_windowing_functions.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/07_windowing_functions/02_overview_of_windowing_functions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="overview-of-windowing-functions">
+<h1>Overview of Windowing Functions<a class="headerlink" href="#overview-of-windowing-functions" title="Permalink to this headline">¶</a></h1>
+<p>Let us get an overview of Windowing Functions using Spark.</p>
+<ul class="simple">
+<li><p>These are available as part of SQL in most of the traditional databases.</p></li>
+<li><p>In some databases they are also known as Analytical Functions.</p></li>
+</ul>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Windowing Functions&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>First let us understand relevance of these functions using <code class="docutils literal notranslate"><span class="pre">employees</span></code> data set.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesPath</span> <span class="o">=</span> <span class="s1">&#39;/public/hr_db/employees&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span> \
+    <span class="n">read</span><span class="o">.</span> \
+    <span class="nb">format</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">option</span><span class="p">(</span><span class="s1">&#39;sep&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">schema</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;employee_id INT, </span>
+<span class="s1">              first_name STRING, </span>
+<span class="s1">              last_name STRING, </span>
+<span class="s1">              email STRING,</span>
+<span class="s1">              phone_number STRING, </span>
+<span class="s1">              hire_date STRING, </span>
+<span class="s1">              job_id STRING, </span>
+<span class="s1">              salary FLOAT,</span>
+<span class="s1">              commission_pct STRING,</span>
+<span class="s1">              manager_id STRING, </span>
+<span class="s1">              department_id STRING</span>
+<span class="s1">            &#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">load</span><span class="p">(</span><span class="n">employeesPath</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+----------+--------+------------------+----------+--------+-------+--------------+----------+-------------+
+|employee_id|first_name| last_name|   email|      phone_number| hire_date|  job_id| salary|commission_pct|manager_id|department_id|
++-----------+----------+----------+--------+------------------+----------+--------+-------+--------------+----------+-------------+
+|        127|     James|    Landry| JLANDRY|      650.124.1334|1999-01-14|ST_CLERK| 2400.0|          null|       120|           50|
+|        128|    Steven|    Markle| SMARKLE|      650.124.1434|2000-03-08|ST_CLERK| 2200.0|          null|       120|           50|
+|        129|     Laura|    Bissot| LBISSOT|      650.124.5234|1997-08-20|ST_CLERK| 3300.0|          null|       121|           50|
+|        130|     Mozhe|  Atkinson|MATKINSO|      650.124.6234|1997-10-30|ST_CLERK| 2800.0|          null|       121|           50|
+|        131|     James|    Marlow| JAMRLOW|      650.124.7234|1997-02-16|ST_CLERK| 2500.0|          null|       121|           50|
+|        132|        TJ|     Olson| TJOLSON|      650.124.8234|1999-04-10|ST_CLERK| 2100.0|          null|       121|           50|
+|        133|     Jason|    Mallin| JMALLIN|      650.127.1934|1996-06-14|ST_CLERK| 3300.0|          null|       122|           50|
+|        134|   Michael|    Rogers| MROGERS|      650.127.1834|1998-08-26|ST_CLERK| 2900.0|          null|       122|           50|
+|        135|        Ki|       Gee|    KGEE|      650.127.1734|1999-12-12|ST_CLERK| 2400.0|          null|       122|           50|
+|        136|     Hazel|Philtanker|HPHILTAN|      650.127.1634|2000-02-06|ST_CLERK| 2200.0|          null|       122|           50|
+|        137|    Renske|    Ladwig| RLADWIG|      650.121.1234|1995-07-14|ST_CLERK| 3600.0|          null|       123|           50|
+|        138|   Stephen|    Stiles| SSTILES|      650.121.2034|1997-10-26|ST_CLERK| 3200.0|          null|       123|           50|
+|        139|      John|       Seo|    JSEO|      650.121.2019|1998-02-12|ST_CLERK| 2700.0|          null|       123|           50|
+|        140|    Joshua|     Patel|  JPATEL|      650.121.1834|1998-04-06|ST_CLERK| 2500.0|          null|       123|           50|
+|        141|    Trenna|      Rajs|   TRAJS|      650.121.8009|1995-10-17|ST_CLERK| 3500.0|          null|       124|           50|
+|        142|    Curtis|    Davies| CDAVIES|      650.121.2994|1997-01-29|ST_CLERK| 3100.0|          null|       124|           50|
+|        143|   Randall|     Matos|  RMATOS|      650.121.2874|1998-03-15|ST_CLERK| 2600.0|          null|       124|           50|
+|        144|     Peter|    Vargas| PVARGAS|      650.121.2004|1998-07-09|ST_CLERK| 2500.0|          null|       124|           50|
+|        145|      John|   Russell| JRUSSEL|011.44.1344.429268|1996-10-01|  SA_MAN|14000.0|          0.40|       100|           80|
+|        146|     Karen|  Partners|KPARTNER|011.44.1344.467268|1997-01-05|  SA_MAN|13500.0|          0.30|       100|           80|
++-----------+----------+----------+--------+------------------+----------+--------+-------+--------------+----------+-------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root
+ |-- employee_id: integer (nullable = true)
+ |-- first_name: string (nullable = true)
+ |-- last_name: string (nullable = true)
+ |-- email: string (nullable = true)
+ |-- phone_number: string (nullable = true)
+ |-- hire_date: string (nullable = true)
+ |-- job_id: string (nullable = true)
+ |-- salary: float (nullable = true)
+ |-- commission_pct: string (nullable = true)
+ |-- manager_id: string (nullable = true)
+ |-- department_id: string (nullable = true)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>107
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="s1">&#39;employee_id&#39;</span><span class="p">,</span> 
+           <span class="n">col</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">),</span> 
+           <span class="s1">&#39;salary&#39;</span>
+          <span class="p">)</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+-------------+-------+
+|employee_id|department_id| salary|
++-----------+-------------+-------+
+|        178|         null| 7000.0|
+|        200|           10| 4400.0|
+|        202|           20| 6000.0|
+|        201|           20|13000.0|
+|        119|           30| 2500.0|
+|        118|           30| 2600.0|
+|        117|           30| 2800.0|
+|        116|           30| 2900.0|
+|        115|           30| 3100.0|
+|        114|           30|11000.0|
+|        203|           40| 6500.0|
+|        132|           50| 2100.0|
+|        128|           50| 2200.0|
+|        136|           50| 2200.0|
+|        135|           50| 2400.0|
+|        127|           50| 2400.0|
+|        131|           50| 2500.0|
+|        140|           50| 2500.0|
+|        191|           50| 2500.0|
+|        144|           50| 2500.0|
++-----------+-------------+-------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Let us say we want to compare individual salary with department wise salary expense.</p></li>
+<li><p>Here is one of the approach which require self join.</p>
+<ul>
+<li><p>Compute department wise expense usig <code class="docutils literal notranslate"><span class="pre">groupBy</span></code> and <code class="docutils literal notranslate"><span class="pre">agg</span></code>.</p></li>
+<li><p>Join with <strong>employees</strong> again on department_id.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">sum</span><span class="p">,</span> <span class="n">col</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">department_expense</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;expense&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">department_expense</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------------+--------+
+|department_id| expense|
++-------------+--------+
+|           30| 24900.0|
+|          110| 20300.0|
+|          100| 51600.0|
+|           70| 10000.0|
+|           90| 58000.0|
+|           60| 28800.0|
+|           40|  6500.0|
+|           20| 19000.0|
+|           10|  4400.0|
+|           80|304500.0|
+|         null|  7000.0|
+|           50|156400.0|
++-------------+--------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="s1">&#39;employee_id&#39;</span><span class="p">,</span> <span class="s1">&#39;department_id&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">join</span><span class="p">(</span><span class="n">department_expense</span><span class="p">,</span> <span class="n">employees</span><span class="o">.</span><span class="n">department_id</span> <span class="o">==</span> <span class="n">department_expense</span><span class="o">.</span><span class="n">department_id</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">department_id</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+-------------+-------+-------------+--------+
+|employee_id|department_id| salary|department_id| expense|
++-----------+-------------+-------+-------------+--------+
+|        200|           10| 4400.0|           10|  4400.0|
+|        113|          100| 6900.0|          100| 51600.0|
+|        111|          100| 7700.0|          100| 51600.0|
+|        112|          100| 7800.0|          100| 51600.0|
+|        110|          100| 8200.0|          100| 51600.0|
+|        109|          100| 9000.0|          100| 51600.0|
+|        108|          100|12000.0|          100| 51600.0|
+|        206|          110| 8300.0|          110| 20300.0|
+|        205|          110|12000.0|          110| 20300.0|
+|        202|           20| 6000.0|           20| 19000.0|
+|        201|           20|13000.0|           20| 19000.0|
+|        119|           30| 2500.0|           30| 24900.0|
+|        118|           30| 2600.0|           30| 24900.0|
+|        117|           30| 2800.0|           30| 24900.0|
+|        116|           30| 2900.0|           30| 24900.0|
+|        115|           30| 3100.0|           30| 24900.0|
+|        114|           30|11000.0|           30| 24900.0|
+|        203|           40| 6500.0|           40|  6500.0|
+|        132|           50| 2100.0|           50|156400.0|
+|        136|           50| 2200.0|           50|156400.0|
++-----------+-------------+-------+-------------+--------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>However, using this approach is not very efficient and also overly complicated. Windowing functions actually simplify the logic and also runs efficiently</strong></p>
+<p>Now let us get into the details related to Windowing functions.</p>
+<ul class="simple">
+<li><p>Main package <code class="docutils literal notranslate"><span class="pre">pyspark.sql.window</span></code></p></li>
+<li><p>It has classes such as <code class="docutils literal notranslate"><span class="pre">Window</span></code> and <code class="docutils literal notranslate"><span class="pre">WindowSpec</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Window</span></code> have APIs such as <code class="docutils literal notranslate"><span class="pre">partitionBy</span></code>, <code class="docutils literal notranslate"><span class="pre">orderBy</span></code> etc</p></li>
+<li><p>These APIs (such as <code class="docutils literal notranslate"><span class="pre">partitionBy</span></code>) return <code class="docutils literal notranslate"><span class="pre">WindowSpec</span></code> object. We can pass <code class="docutils literal notranslate"><span class="pre">WindowSpec</span></code> object to over on functions such as <code class="docutils literal notranslate"><span class="pre">rank()</span></code>, <code class="docutils literal notranslate"><span class="pre">dense_rank()</span></code>, <code class="docutils literal notranslate"><span class="pre">sum()</span></code> etc</p></li>
+<li><p>Syntax: <code class="docutils literal notranslate"><span class="pre">sum().over(spec)</span></code> where <code class="docutils literal notranslate"><span class="pre">spec</span> <span class="pre">=</span> <span class="pre">Window.partitionBy('ColumnName')</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">window</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on module pyspark.sql.window in pyspark.sql:
+
+NAME
+    pyspark.sql.window
+
+DESCRIPTION
+    # Licensed to the Apache Software Foundation (ASF) under one or more
+    # contributor license agreements.  See the NOTICE file distributed with
+    # this work for additional information regarding copyright ownership.
+    # The ASF licenses this file to You under the Apache License, Version 2.0
+    # (the &quot;License&quot;); you may not use this file except in compliance with
+    # the License.  You may obtain a copy of the License at
+    #
+    #    http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    #
+
+CLASSES
+    builtins.object
+        Window
+        WindowSpec
+    
+    class Window(builtins.object)
+     |  Utility functions for defining window in DataFrames.
+     |  
+     |  For example:
+     |  
+     |  &gt;&gt;&gt; # ORDER BY date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+     |  &gt;&gt;&gt; window = Window.orderBy(&quot;date&quot;).rowsBetween(Window.unboundedPreceding, Window.currentRow)
+     |  
+     |  &gt;&gt;&gt; # PARTITION BY country ORDER BY date RANGE BETWEEN 3 PRECEDING AND 3 FOLLOWING
+     |  &gt;&gt;&gt; window = Window.orderBy(&quot;date&quot;).partitionBy(&quot;country&quot;).rangeBetween(-3, 3)
+     |  
+     |  .. note:: When ordering is not defined, an unbounded window frame (rowFrame,
+     |       unboundedPreceding, unboundedFollowing) is used by default. When ordering is defined,
+     |       a growing window frame (rangeFrame, unboundedPreceding, currentRow) is used by default.
+     |  
+     |  .. note:: Experimental
+     |  
+     |  .. versionadded:: 1.4
+     |  
+     |  Static methods defined here:
+     |  
+     |  orderBy(*cols)
+     |      Creates a :class:`WindowSpec` with the ordering defined.
+     |      
+     |      .. versionadded:: 1.4
+     |  
+     |  partitionBy(*cols)
+     |      Creates a :class:`WindowSpec` with the partitioning defined.
+     |      
+     |      .. versionadded:: 1.4
+     |  
+     |  rangeBetween(start, end)
+     |      Creates a :class:`WindowSpec` with the frame boundaries defined,
+     |      from `start` (inclusive) to `end` (inclusive).
+     |      
+     |      Both `start` and `end` are relative from the current row. For example,
+     |      &quot;0&quot; means &quot;current row&quot;, while &quot;-1&quot; means one off before the current row,
+     |      and &quot;5&quot; means the five off after the current row.
+     |      
+     |      We recommend users use ``Window.unboundedPreceding``, ``Window.unboundedFollowing``,
+     |      and ``Window.currentRow`` to specify special boundary values, rather than using integral
+     |      values directly.
+     |      
+     |      :param start: boundary start, inclusive.
+     |                    The frame is unbounded if this is ``Window.unboundedPreceding``, or
+     |                    any value less than or equal to max(-sys.maxsize, -9223372036854775808).
+     |      :param end: boundary end, inclusive.
+     |                  The frame is unbounded if this is ``Window.unboundedFollowing``, or
+     |                  any value greater than or equal to min(sys.maxsize, 9223372036854775807).
+     |      
+     |      .. versionadded:: 2.1
+     |  
+     |  rowsBetween(start, end)
+     |      Creates a :class:`WindowSpec` with the frame boundaries defined,
+     |      from `start` (inclusive) to `end` (inclusive).
+     |      
+     |      Both `start` and `end` are relative positions from the current row.
+     |      For example, &quot;0&quot; means &quot;current row&quot;, while &quot;-1&quot; means the row before
+     |      the current row, and &quot;5&quot; means the fifth row after the current row.
+     |      
+     |      We recommend users use ``Window.unboundedPreceding``, ``Window.unboundedFollowing``,
+     |      and ``Window.currentRow`` to specify special boundary values, rather than using integral
+     |      values directly.
+     |      
+     |      :param start: boundary start, inclusive.
+     |                    The frame is unbounded if this is ``Window.unboundedPreceding``, or
+     |                    any value less than or equal to -9223372036854775808.
+     |      :param end: boundary end, inclusive.
+     |                  The frame is unbounded if this is ``Window.unboundedFollowing``, or
+     |                  any value greater than or equal to 9223372036854775807.
+     |      
+     |      .. versionadded:: 2.1
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  currentRow = 0
+     |  
+     |  unboundedFollowing = 9223372036854775807
+     |  
+     |  unboundedPreceding = -9223372036854775808
+    
+    class WindowSpec(builtins.object)
+     |  A window specification that defines the partitioning, ordering,
+     |  and frame boundaries.
+     |  
+     |  Use the static methods in :class:`Window` to create a :class:`WindowSpec`.
+     |  
+     |  .. note:: Experimental
+     |  
+     |  .. versionadded:: 1.4
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, jspec)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  orderBy(self, *cols)
+     |      Defines the ordering columns in a :class:`WindowSpec`.
+     |      
+     |      :param cols: names of columns or expressions
+     |      
+     |      .. versionadded:: 1.4
+     |  
+     |  partitionBy(self, *cols)
+     |      Defines the partitioning columns in a :class:`WindowSpec`.
+     |      
+     |      :param cols: names of columns or expressions
+     |      
+     |      .. versionadded:: 1.4
+     |  
+     |  rangeBetween(self, start, end)
+     |      Defines the frame boundaries, from `start` (inclusive) to `end` (inclusive).
+     |      
+     |      Both `start` and `end` are relative from the current row. For example,
+     |      &quot;0&quot; means &quot;current row&quot;, while &quot;-1&quot; means one off before the current row,
+     |      and &quot;5&quot; means the five off after the current row.
+     |      
+     |      We recommend users use ``Window.unboundedPreceding``, ``Window.unboundedFollowing``,
+     |      and ``Window.currentRow`` to specify special boundary values, rather than using integral
+     |      values directly.
+     |      
+     |      :param start: boundary start, inclusive.
+     |                    The frame is unbounded if this is ``Window.unboundedPreceding``, or
+     |                    any value less than or equal to max(-sys.maxsize, -9223372036854775808).
+     |      :param end: boundary end, inclusive.
+     |                  The frame is unbounded if this is ``Window.unboundedFollowing``, or
+     |                  any value greater than or equal to min(sys.maxsize, 9223372036854775807).
+     |      
+     |      .. versionadded:: 1.4
+     |  
+     |  rowsBetween(self, start, end)
+     |      Defines the frame boundaries, from `start` (inclusive) to `end` (inclusive).
+     |      
+     |      Both `start` and `end` are relative positions from the current row.
+     |      For example, &quot;0&quot; means &quot;current row&quot;, while &quot;-1&quot; means the row before
+     |      the current row, and &quot;5&quot; means the fifth row after the current row.
+     |      
+     |      We recommend users use ``Window.unboundedPreceding``, ``Window.unboundedFollowing``,
+     |      and ``Window.currentRow`` to specify special boundary values, rather than using integral
+     |      values directly.
+     |      
+     |      :param start: boundary start, inclusive.
+     |                    The frame is unbounded if this is ``Window.unboundedPreceding``, or
+     |                    any value less than or equal to max(-sys.maxsize, -9223372036854775808).
+     |      :param end: boundary end, inclusive.
+     |                  The frame is unbounded if this is ``Window.unboundedFollowing``, or
+     |                  any value greater than or equal to min(sys.maxsize, 9223372036854775807).
+     |      
+     |      .. versionadded:: 1.4
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+
+DATA
+    __all__ = [&#39;Window&#39;, &#39;WindowSpec&#39;]
+
+FILE
+    /opt/spark-2.4.7-bin-hadoop2.7/python/pyspark/sql/window.py
+</pre></div>
+</div>
+</div>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Functions</p></th>
+<th class="text-align:center head"><p>API or Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Aggregate Functions</p></td>
+<td class="text-align:center"><p><ul><li>sum</li><li>avg</li><li>min</li><li>max</li></ul></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ranking Functions</p></td>
+<td class="text-align:center"><p><ul><li>rank</li><li>dense_rank</li></ul><ul><li>percent_rank</li><li>row_number</li> <li>ntile</li></ul></p></td>
+</tr>
+<tr class="row-even"><td><p>Analytic Functions</p></td>
+<td class="text-align:center"><p><ul><li>cume_dist</li><li>first</li><li>last</li><li>lead</li> <li>lag</li></ul></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./07_windowing_functions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="01_windowing_functions.html" title="previous page">Windowing Functions</a>
+    <a class='right-next' id="next-link" href="03_aggregate_functions.html" title="next page">Aggregate Functions</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>&lt;no title&gt; &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/generate_toc.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2Fgenerate_toc.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/generate_toc.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/generate_toc.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="simple nav section-nav flex-column">
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files_wo_extension</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*/*.ipynb&#39;</span><span class="p">):</span>
+    <span class="n">file_wo_extension</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">files_wo_extension</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_wo_extension</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">itr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files_grouped</span> <span class="o">=</span> <span class="n">itr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">files_wo_extension</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">file</span><span class="p">:</span> <span class="n">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">folder</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">files_grouped</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- file: </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  sections:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  - file: </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- file: 01_getting_started_pyspark/01_getting_started_pyspark
+  sections:
+  - file: 01_getting_started_pyspark/01_getting_started_pyspark
+  - file: 01_getting_started_pyspark/02_platforms_to_practice
+  - file: 01_getting_started_pyspark/03_setup_spark_locally_windows
+  - file: 01_getting_started_pyspark/04_setup_spark_locally_mac
+  - file: 01_getting_started_pyspark/05_setup_spark_locally_ubuntu
+  - file: 01_getting_started_pyspark/06_using_itversity_labs
+  - file: 01_getting_started_pyspark/07_using_google_colab
+  - file: 01_getting_started_pyspark/08_overview_of_filesystems
+  - file: 01_getting_started_pyspark/09_different_spark_modules
+  - file: 01_getting_started_pyspark/10_spark_cluster_manager_types
+  - file: 01_getting_started_pyspark/11_launching_pyspark_cli
+  - file: 01_getting_started_pyspark/12_using_jupyter_lab_interface
+  - file: 01_getting_started_pyspark/13_word_count_using_spark
+
+- file: 02_quick_recap_of_python/01_quick_recap_of_python
+  sections:
+  - file: 02_quick_recap_of_python/01_quick_recap_of_python
+  - file: 02_quick_recap_of_python/02_data_engineering_life_cycle
+  - file: 02_quick_recap_of_python/03_getting_started_python_and_pip
+  - file: 02_quick_recap_of_python/04_python_cli_or_jupyter_notebook
+  - file: 02_quick_recap_of_python/05_basic_programming_constructs
+  - file: 02_quick_recap_of_python/06_developing_functions
+  - file: 02_quick_recap_of_python/07_lambda_functions
+  - file: 02_quick_recap_of_python/08_overview_of_collections
+  - file: 02_quick_recap_of_python/09_overview_of_pandas_dataframes
+  - file: 02_quick_recap_of_python/10_limitations_of_pandas
+  - file: 02_quick_recap_of_python/11_development_life_cycle
+  - file: 02_quick_recap_of_python/12_exercises_recap_of_python
+
+- file: 03_data_processing_overview/01_data_processing_overview
+  sections:
+  - file: 03_data_processing_overview/01_data_processing_overview
+  - file: 03_data_processing_overview/02_prerequisites_and_objectives
+  - file: 03_data_processing_overview/03_starting_spark_context
+  - file: 03_data_processing_overview/04_overview_of_spark_read_apis
+  - file: 03_data_processing_overview/05_understand_airlines_data
+  - file: 03_data_processing_overview/06_inferring_schema
+  - file: 03_data_processing_overview/07_previewing_airlines_data
+  - file: 03_data_processing_overview/08_overview_of_dataframe_apis
+  - file: 03_data_processing_overview/09_overview_of_functions
+  - file: 03_data_processing_overview/10_overview_of_spark_write_apis
+  - file: 03_data_processing_overview/11_reorganizing_airlines_data
+  - file: 03_data_processing_overview/12_previewing_reorganized_data
+  - file: 03_data_processing_overview/13_analyze_and_understand_data
+  - file: 03_data_processing_overview/14_conclusion_data_processing_overview
+
+- file: 04_processing_column_data/01_processing_column_data
+  sections:
+  - file: 04_processing_column_data/01_processing_column_data
+  - file: 04_processing_column_data/02_predefined_functions
+  - file: 04_processing_column_data/03_create_dummy_dataframes
+  - file: 04_processing_column_data/04_categories_of_functions
+  - file: 04_processing_column_data/05_special_functions_col_and_lit
+  - file: 04_processing_column_data/06_common_string_manipulation_functions
+  - file: 04_processing_column_data/07_extracting_strings_using_substring
+  - file: 04_processing_column_data/08_extracting_strings_using_split
+  - file: 04_processing_column_data/09_padding_characters_around_strings
+  - file: 04_processing_column_data/10_trimming_characters_from_strings
+  - file: 04_processing_column_data/11_date_and_time_manipulation_functions
+  - file: 04_processing_column_data/12_date_and_time_arithmetic
+  - file: 04_processing_column_data/13_using_date_and_time_trunc_functions
+  - file: 04_processing_column_data/14_date_and_time_extract_functions
+  - file: 04_processing_column_data/15_using_to_date_and_to_timestamp
+  - file: 04_processing_column_data/16_using_date_format_function
+  - file: 04_processing_column_data/17_dealing_with_unix_timestamp
+  - file: 04_processing_column_data/18_dealing_with_nulls
+  - file: 04_processing_column_data/19_using_case_and_when
+  - file: 04_processing_column_data/20_conclusion_predefined_functions
+  - file: 04_processing_column_data/21_exercises_predefined_functions
+
+- file: 05_basic_transformations/01_basic_transformations
+  sections:
+  - file: 05_basic_transformations/01_basic_transformations
+  - file: 05_basic_transformations/02_overview_of_basic_transformations
+  - file: 05_basic_transformations/03_data_frame_for_basic_transformations
+  - file: 05_basic_transformations/04_basic_filtering_of_data
+  - file: 05_basic_transformations/05_filtering_example_using_dates
+  - file: 05_basic_transformations/06_boolean_operators
+  - file: 05_basic_transformations/07_using_in_operator_or_isin_function
+  - file: 05_basic_transformations/08_using_like_operator_or_function
+  - file: 05_basic_transformations/09_using_between_operator
+  - file: 05_basic_transformations/10_dealing_with_nulls_while_filtering
+  - file: 05_basic_transformations/11_total_aggregations
+  - file: 05_basic_transformations/12_aggregate_data_using_groupby
+  - file: 05_basic_transformations/13_aggregate_data_using_rollup
+  - file: 05_basic_transformations/14_aggregate_data_using_cube
+  - file: 05_basic_transformations/15_overview_of_sorting_data_frames
+  - file: 05_basic_transformations/16_solution_problem_1
+  - file: 05_basic_transformations/17_solution_problem_2
+  - file: 05_basic_transformations/18_solution_problem_3
+
+- file: 06_joining_data_sets/01_joining_data_sets
+  sections:
+  - file: 06_joining_data_sets/01_joining_data_sets
+  - file: 06_joining_data_sets/02_preparing_data_sets_for_joins
+  - file: 06_joining_data_sets/03_analyze_data_sets_for_joins
+  - file: 06_joining_data_sets/04_problem_statements_for_joins
+  - file: 06_joining_data_sets/05_overview_of_joins
+  - file: 06_joining_data_sets/06_using_inner_joins
+  - file: 06_joining_data_sets/07_left_or_right_outer_join
+  - file: 06_joining_data_sets/08_solutions_problem_1
+  - file: 06_joining_data_sets/09_solutions_problem_2
+  - file: 06_joining_data_sets/10_solutions_problem_3
+  - file: 06_joining_data_sets/11_solutions_problem_4
+  - file: 06_joining_data_sets/12_solutions_problem_5
+  - file: 06_joining_data_sets/13_solutions_problem_6
+  - file: 06_joining_data_sets/14_solutions_problem_7
+  - file: 06_joining_data_sets/15_solutions_problem_8
+
+- file: 07_windowing_functions/01_windowing_functions
+  sections:
+  - file: 07_windowing_functions/01_windowing_functions
+  - file: 07_windowing_functions/02_overview_of_windowing_functions
+  - file: 07_windowing_functions/03_aggregate_functions
+  - file: 07_windowing_functions/04_using_rowsBetween_and_rangeBetween
+  - file: 07_windowing_functions/05_ranking_functions
+  - file: 07_windowing_functions/06_using_lead_or_lag
+  - file: 07_windowing_functions/07_using_first_and_last_functions
+  - file: 07_windowing_functions/10_aggregate_functions_examples
+
+- file: 08_spark_metastore/01_spark_metastore
+  sections:
+  - file: 08_spark_metastore/01_spark_metastore
+  - file: 08_spark_metastore/02_overview_of_spark_metastore
+  - file: 08_spark_metastore/03_exploring_spark_catalog
+  - file: 08_spark_metastore/04_creating_metastore_tables_using_catalog
+  - file: 08_spark_metastore/05_inferring_schema_for_tables
+  - file: 08_spark_metastore/06_define_schema_for_tables_using_structtype
+  - file: 08_spark_metastore/07_inserting_into_existing_tables
+  - file: 08_spark_metastore/08_read_and_process_data_from_metastore_tables
+  - file: 08_spark_metastore/09_creating_partitioned_tables
+  - file: 08_spark_metastore/10_saving_as_partitioned_tables-Copy1
+  - file: 08_spark_metastore/11_creating_temp_views
+  - file: 08_spark_metastore/12_using_spark_sql
+
+- file: 09_analyzing_gharchive_data/02_download_data
+  sections:
+  - file: 09_analyzing_gharchive_data/02_download_data
+  - file: 09_analyzing_gharchive_data/03_copy_to_hdfs_landing
+  - file: 09_analyzing_gharchive_data/04_create_external_table
+  - file: 09_analyzing_gharchive_data/05_overview_of_json
+  - file: 09_analyzing_gharchive_data/06_get_new_repositories
+  - file: 09_analyzing_gharchive_data/07_get_repository_pushes
+  - file: 09_analyzing_gharchive_data/99_ghdata_queries
+
+- file: 12_special_data_types/02 Create Tables with Special Types
+  sections:
+  - file: 12_special_data_types/02 Create Tables with Special Types
+  - file: 12_special_data_types/03 Create Data Frame with Special Types
+  - file: 12_special_data_types/04 Exploding Arrays into Records
+  - file: 12_special_data_types/05 Generating Arrays from Strings
+  - file: 12_special_data_types/06 Processing Arrays
+  - file: 12_special_data_types/07 Projecting Struct and Map Columns
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

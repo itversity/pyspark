@@ -1,0 +1,695 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using LIKE Operator or like Function &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using BETWEEN Operator" href="09_using_between_operator.html" />
+    <link rel="prev" title="Using IN Operator or isin Function" href="07_using_in_operator_or_isin_function.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_basic_transformations.html">
+   Basic Transformations
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_overview_of_basic_transformations.html">
+     Overview of Basic Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_data_frame_for_basic_transformations.html">
+     Data Frame for basic transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_basic_filtering_of_data.html">
+     Basic Filtering of Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_filtering_example_using_dates.html">
+     Filtering example using dates
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_boolean_operators.html">
+     Boolean Operators
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_using_in_operator_or_isin_function.html">
+     Using IN Operator or isin Function
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Using LIKE Operator or like Function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_using_between_operator.html">
+     Using BETWEEN Operator
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_dealing_with_nulls_while_filtering.html">
+     Dealing with Nulls while Filtering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11_total_aggregations.html">
+     Total Aggregations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12_aggregate_data_using_groupby.html">
+     Aggregate data using groupBy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="13_aggregate_data_using_rollup.html">
+     Aggregate data using rollup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="14_aggregate_data_using_cube.html">
+     Aggregate data using cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="15_overview_of_sorting_data_frames.html">
+     Overview of Sorting Data Frames
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="16_solution_problem_1.html">
+     Solutions - Problem 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="17_solution_problem_2.html">
+     Solutions - Problem 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="18_solution_problem_3.html">
+     Solutions - Problem 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/05_basic_transformations/08_using_like_operator_or_function.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F05_basic_transformations/08_using_like_operator_or_function.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/05_basic_transformations/08_using_like_operator_or_function.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/05_basic_transformations/08_using_like_operator_or_function.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="using-like-operator-or-like-function">
+<h1>Using LIKE Operator or like Function<a class="headerlink" href="#using-like-operator-or-like-function" title="Permalink to this headline">¶</a></h1>
+<p>Let us understand the usage of <code class="docutils literal notranslate"><span class="pre">LIKE</span></code> operator or <code class="docutils literal notranslate"><span class="pre">like</span></code> function while filtering the data in Data Frames.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">like</span></code> is primarily used for partial comparison (e.g.: Search for names which starts with Sco).</p></li>
+<li><p>We can use <code class="docutils literal notranslate"><span class="pre">like</span></code> to get results which starts with a pattern or ends with a pattern or contain the pattern.</p></li>
+<li><p>We can also use negation with <code class="docutils literal notranslate"><span class="pre">like</span></code>.</p></li>
+<li><p>Spark also provides <code class="docutils literal notranslate"><span class="pre">rlike</span></code> to take care of partial comparison using regular expression.</p></li>
+</ul>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Basic Transformations&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Scott&quot;</span><span class="p">,</span> <span class="s2">&quot;Tiger&quot;</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>
+                      <span class="s2">&quot;united states&quot;</span><span class="p">,</span> <span class="s2">&quot;+1 123 456 7890&quot;</span><span class="p">,</span> <span class="s2">&quot;123 45 6789&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Henry&quot;</span><span class="p">,</span> <span class="s2">&quot;Ford&quot;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="s2">&quot;India&quot;</span><span class="p">,</span> <span class="s2">&quot;+91 234 567 8901&quot;</span><span class="p">,</span> <span class="s2">&quot;456 78 9123&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Nick&quot;</span><span class="p">,</span> <span class="s2">&quot;Junior&quot;</span><span class="p">,</span> <span class="mf">750.0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                      <span class="s2">&quot;united KINGDOM&quot;</span><span class="p">,</span> <span class="s2">&quot;+44 111 111 1111&quot;</span><span class="p">,</span> <span class="s2">&quot;222 33 4444&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Bill&quot;</span><span class="p">,</span> <span class="s2">&quot;Gomes&quot;</span><span class="p">,</span> <span class="mf">1500.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>
+                      <span class="s2">&quot;AUSTRALIA&quot;</span><span class="p">,</span> <span class="s2">&quot;+61 987 654 3210&quot;</span><span class="p">,</span> <span class="s2">&quot;789 12 6118&quot;</span>
+                     <span class="p">)</span>
+                <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span> \
+    <span class="n">createDataFrame</span><span class="p">(</span><span class="n">employees</span><span class="p">,</span>
+                    <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;employee_id INT, first_name STRING, </span>
+<span class="s2">                    last_name STRING, salary FLOAT, bonus STRING, nationality STRING,</span>
+<span class="s2">                    phone_number STRING, ssn STRING&quot;&quot;&quot;</span>
+                   <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10| united states| +1 123 456 7890|123 45 6789|
+|          2|     Henry|     Ford|1250.0| null|         India|+91 234 567 8901|456 78 9123|
+|          3|      Nick|   Junior| 750.0|     |united KINGDOM|+44 111 111 1111|222 33 4444|
+|          4|      Bill|    Gomes|1500.0|   10|     AUSTRALIA|+61 987 654 3210|789 12 6118|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Get employees whose first name starts with <strong>Sco</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;first_name LIKE &#39;Sco%&#39;&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|  nationality|   phone_number|        ssn|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10|united states|+1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;upper(first_name) LIKE &#39;SCO%&#39;&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|  nationality|   phone_number|        ssn|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10|united states|+1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>API Style</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">like</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method _ in module pyspark.sql.column:
+
+_(other) method of pyspark.sql.column.Column instance
+    SQL like expression. Returns a boolean :class:`Column` based on a SQL LIKE match.
+    
+    :param other: a SQL LIKE pattern
+    
+    See :func:`rlike` for a regex version
+    
+    &gt;&gt;&gt; df.filter(df.name.like(&#39;Al%&#39;)).collect()
+    [Row(age=2, name=&#39;Alice&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># % at the end is mandatory</span>
+<span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s1">&#39;Sco%&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|  nationality|   phone_number|        ssn|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10|united states|+1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">upper</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s1">&#39;SCO%&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|  nationality|   phone_number|        ssn|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10|united states|+1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Get employees where first name contain <code class="docutils literal notranslate"><span class="pre">ott</span></code> irrespective of case.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;upper(first_name) LIKE &#39;%OTT%&#39;&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|  nationality|   phone_number|        ssn|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10|united states|+1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s1">&#39;%OTT%&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|  nationality|   phone_number|        ssn|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10|united states|+1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+-----+-------------+---------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Get employees whose phone number does not start with <strong>+44</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;phone_number NOT LIKE &#39;+44%&#39;&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+-------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|  nationality|    phone_number|        ssn|
++-----------+----------+---------+------+-----+-------------+----------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10|united states| +1 123 456 7890|123 45 6789|
+|          2|     Henry|     Ford|1250.0| null|        India|+91 234 567 8901|456 78 9123|
+|          4|      Bill|    Gomes|1500.0|   10|    AUSTRALIA|+61 987 654 3210|789 12 6118|
++-----------+----------+---------+------+-----+-------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="o">~</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;phone_number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s1">&#39;+44%&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+-------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|  nationality|    phone_number|        ssn|
++-----------+----------+---------+------+-----+-------------+----------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10|united states| +1 123 456 7890|123 45 6789|
+|          2|     Henry|     Ford|1250.0| null|        India|+91 234 567 8901|456 78 9123|
+|          4|      Bill|    Gomes|1500.0|   10|    AUSTRALIA|+61 987 654 3210|789 12 6118|
++-----------+----------+---------+------+-----+-------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./05_basic_transformations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="07_using_in_operator_or_isin_function.html" title="previous page">Using IN Operator or isin Function</a>
+    <a class='right-next' id="next-link" href="09_using_between_operator.html" title="next page">Using BETWEEN Operator</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

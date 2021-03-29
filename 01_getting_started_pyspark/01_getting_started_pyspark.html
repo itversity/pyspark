@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Platforms to Practice" href="02_platforms_to_practice.html" />
+    <link rel="prev" title="Mastering Pyspark" href="../mastering-pyspark.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Getting Started
+  </a>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_platforms_to_practice.html">
+     Platforms to Practice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_setup_spark_locally_windows.html">
+     Setup Spark Locally - Windows
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_setup_spark_locally_mac.html">
+     Setup Spark Locally - Mac
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_setup_spark_locally_ubuntu.html">
+     Setup Spark Locally - Ubuntu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_using_itversity_labs.html">
+     Using ITVersity Labs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08_overview_of_filesystems.html">
+     Overview of File Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_different_spark_modules.html">
+     Different Spark Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_spark_cluster_manager_types.html">
+     Spark Cluster Manager Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11_launching_pyspark_cli.html">
+     Launching Spark CLI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12_using_jupyter_lab_interface.html">
+     Using Jupyter Lab Interface
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/01_getting_started_pyspark/01_getting_started_pyspark.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F01_getting_started_pyspark/01_getting_started_pyspark.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/01_getting_started_pyspark/01_getting_started_pyspark.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/01_getting_started_pyspark/01_getting_started_pyspark.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup-spark-locally-ubuntu">
+   Setup Spark Locally - Ubuntu
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup-spark-locally-mac">
+   Setup Spark Locally - Mac
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#let-us-setup-spark-locally-on-ubuntu">
+     Let us setup Spark Locally on Ubuntu.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#signing-up-for-itversity-labs">
+   Signing up for ITVersity Labs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-itversity-labs">
+   Using ITVersity Labs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interacting-with-file-systems">
+   Interacting with File Systems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-file-metadata">
+   Getting File Metadata
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setup-spark-locally-ubuntu">
+<h2>Setup Spark Locally - Ubuntu<a class="headerlink" href="#setup-spark-locally-ubuntu" title="Permalink to this headline">¶</a></h2>
+<p>Let us setup Spark Locally on Ubuntu.</p>
+<ul class="simple">
+<li><p>Install latest version of Anaconda</p></li>
+<li><p>Make sure Jupyter Notebook is setup and validated.</p></li>
+<li><p>Setup Spark and Validate.</p></li>
+<li><p>Setup Environment Variables to integrate Pyspark with Jupyter Notebook.</p></li>
+<li><p>Launch Jupyter Notebook using <code class="docutils literal notranslate"><span class="pre">pyspark</span></code> command.</p></li>
+<li><p>Setup PyCharm (IDE) for application development.</p></li>
+</ul>
+</div>
+<div class="section" id="setup-spark-locally-mac">
+<h2>Setup Spark Locally - Mac<a class="headerlink" href="#setup-spark-locally-mac" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="let-us-setup-spark-locally-on-ubuntu">
+<h3>Let us setup Spark Locally on Ubuntu.<a class="headerlink" href="#let-us-setup-spark-locally-on-ubuntu" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Install latest version of Anaconda</p></li>
+<li><p>Make sure Jupyter Notebook is setup and validated.</p></li>
+<li><p>Setup Spark and Validate.</p></li>
+<li><p>Setup Environment Variables to integrate Pyspark with Jupyter Notebook.</p></li>
+<li><p>Launch Jupyter Notebook using <code class="docutils literal notranslate"><span class="pre">pyspark</span></code> command.</p></li>
+<li><p>Setup PyCharm (IDE) for application development.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="signing-up-for-itversity-labs">
+<h2>Signing up for ITVersity Labs<a class="headerlink" href="#signing-up-for-itversity-labs" title="Permalink to this headline">¶</a></h2>
+<p>Here are the steps for signing to ITVersity labs.</p>
+<ul class="simple">
+<li><p>Go to https://labs.itversity.com</p></li>
+<li><p>Sign up to our website</p></li>
+<li><p>Purchase lab access</p></li>
+<li><p>Go to lab page and create lab account</p></li>
+<li><p>Login and practice</p></li>
+</ul>
+</div>
+<div class="section" id="using-itversity-labs">
+<h2>Using ITVersity Labs<a class="headerlink" href="#using-itversity-labs" title="Permalink to this headline">¶</a></h2>
+<p>Let us understand how to submit the Spark Jobs in ITVersity Labs.</p>
+<ul class="simple">
+<li><p>You can either use Jupyter based environment or <code class="docutils literal notranslate"><span class="pre">pyspark</span></code> in terminal to submit jobs in ITVersity labs.</p></li>
+<li><p>You can also submit Spark jobs using <code class="docutils literal notranslate"><span class="pre">spark-submit</span></code> command.</p></li>
+<li><p>As we are using Python we can also use the help command to get the documentation - for example <code class="docutils literal notranslate"><span class="pre">help(spark.read.csv)</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="interacting-with-file-systems">
+<h2>Interacting with File Systems<a class="headerlink" href="#interacting-with-file-systems" title="Permalink to this headline">¶</a></h2>
+<p>Let us understand how to interact with file system using %fs command from Databricks Notebook.</p>
+<ul class="simple">
+<li><p>We can access datasets using %fs magic command in Databricks notebook</p></li>
+<li><p>By default, we will see files under dbfs</p></li>
+<li><p>We can list the files using ls command - e. g.: <code class="docutils literal notranslate"><span class="pre">%fs</span> <span class="pre">ls</span></code></p></li>
+<li><p>Databricks provides lot of datasets for free under databricks-datasets</p></li>
+<li><p>If the cluster is integrated with AWS or Azure Blob we can access files by specifying the appropriate protocol (e.g.: s3:// for s3)</p></li>
+<li><p>List of commands available under <code class="docutils literal notranslate"><span class="pre">%fs</span></code></p>
+<ul>
+<li><p>Copying files or directories <code class="docutils literal notranslate"><span class="pre">-cp</span></code></p></li>
+<li><p>Moving files or directories <code class="docutils literal notranslate"><span class="pre">-mv</span></code></p></li>
+<li><p>Creating directories <code class="docutils literal notranslate"><span class="pre">-mkdirs</span></code></p></li>
+<li><p>Deleting files and directories <code class="docutils literal notranslate"><span class="pre">-rm</span></code></p></li>
+<li><p>We can copy or delete directories recursively using <code class="docutils literal notranslate"><span class="pre">-r</span></code> or <code class="docutils literal notranslate"><span class="pre">--recursive</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="getting-file-metadata">
+<h2>Getting File Metadata<a class="headerlink" href="#getting-file-metadata" title="Permalink to this headline">¶</a></h2>
+<p>Let us review the source location to get number of files and the size of the data we are going to process.</p>
+<ul class="simple">
+<li><p>Location of airlines data dbfs:/databricks-datasets/airlines</p></li>
+<li><p>We can get first 1000 files using %fs ls dbfs:/databricks-datasets/airlines</p></li>
+<li><p>Location contain 1919 Files, however we will not be able to see all the details using %fs command.</p></li>
+<li><p>Databricks File System commands does not have capability to understand metadata of files such as size in details.</p></li>
+<li><p>When Spark Cluster is started, it will create 2 objects - spark and sc</p></li>
+<li><p>sc is of type SparkContext and spark is of type SparkSession</p></li>
+<li><p>Spark uses HDFS APIs to interact with the file system and we can access HDFS APIs using sc._jsc and sc._jvm to get file metadata.</p></li>
+<li><p>Here are the steps to get the file metadata.</p>
+<ul>
+<li><p>Get Hadoop Configuration using <code class="docutils literal notranslate"><span class="pre">sc._jsc.hadoopConfiguration()</span></code> - let’s say <code class="docutils literal notranslate"><span class="pre">conf</span></code></p></li>
+<li><p>We can pass conf to <code class="docutils literal notranslate"><span class="pre">sc._jvm.org.apache.hadoop.fs.FileSystem</span></code> get to get FileSystem object - let’s say <code class="docutils literal notranslate"><span class="pre">fs</span></code></p></li>
+<li><p>We can build <code class="docutils literal notranslate"><span class="pre">path</span></code>  object by passing the path as string to <code class="docutils literal notranslate"><span class="pre">sc._jvm.org.apache.hadoop.fs.Path</span></code></p></li>
+<li><p>We can invoke <code class="docutils literal notranslate"><span class="pre">listStatus</span></code> on top of fs by passing path which will return an array of FileStatus objects - let’s say files.</p></li>
+<li><p>Each <code class="docutils literal notranslate"><span class="pre">FileStatus</span></code> object have all the metadata of each file.</p></li>
+<li><p>We can use <code class="docutils literal notranslate"><span class="pre">len</span></code> on files to get number of files.</p></li>
+<li><p>We can use <code class="docutils literal notranslate"><span class="pre">&gt;getLen</span></code> on each <code class="docutils literal notranslate"><span class="pre">FileStatus</span></code> object to get the size of each file.</p></li>
+<li><p>Cumulative size of all files can be achieved using <code class="docutils literal notranslate"><span class="pre">sum(map(lambda</span> <span class="pre">file:</span> <span class="pre">file.getLen(),</span> <span class="pre">files))</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>Let us first get list of files</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">fs</span> ls dbfs:/databricks-datasets/airlines
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is the consolidated script to get number of files and cumulative size of all files in a given folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">_jsc</span><span class="o">.</span><span class="n">hadoopConfiguration</span><span class="p">()</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">_jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">hadoop</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">FileSystem</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">_jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">hadoop</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;dbfs:/databricks-datasets/airlines&quot;</span><span class="p">)</span>
+
+<span class="n">files</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">listStatus</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">file</span><span class="p">:</span> <span class="n">file</span><span class="o">.</span><span class="n">getLen</span><span class="p">(),</span> <span class="n">files</span><span class="p">))</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./01_getting_started_pyspark"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../mastering-pyspark.html" title="previous page">Mastering Pyspark</a>
+    <a class='right-next' id="next-link" href="02_platforms_to_practice.html" title="next page">Platforms to Practice</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

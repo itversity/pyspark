@@ -1,0 +1,1116 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Special Functions - col and lit &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Common String Manipulation Functions" href="06_common_string_manipulation_functions.html" />
+    <link rel="prev" title="Categories of Functions" href="04_categories_of_functions.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_processing_column_data.html">
+   Processing Column Data
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_predefined_functions.html">
+     Pre-defined Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_create_dummy_dataframes.html">
+     Create Dummy Data Frame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_categories_of_functions.html">
+     Categories of Functions
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Special Functions - col and lit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_common_string_manipulation_functions.html">
+     Common String Manipulation Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_extracting_strings_using_substring.html">
+     Extracting Strings using substring
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08_extracting_strings_using_split.html">
+     Extracting Strings using split
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_padding_characters_around_strings.html">
+     Padding Characters around Strings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_trimming_characters_from_strings.html">
+     Trimming Characters from Strings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11_date_and_time_manipulation_functions.html">
+     Date and Time Manipulation Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12_date_and_time_arithmetic.html">
+     Date and Time Arithmetic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="13_using_date_and_time_trunc_functions.html">
+     Using Date and Time Trunc Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="14_date_and_time_extract_functions.html">
+     Date and Time Extract Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="15_using_to_date_and_to_timestamp.html">
+     Using to_date and to_timestamp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="16_using_date_format_function.html">
+     Using date_format Function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="17_dealing_with_unix_timestamp.html">
+     Dealing with Unix Timestamp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="18_dealing_with_nulls.html">
+     Dealing with Nulls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="19_using_case_and_when.html">
+     Using CASE and WHEN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="20_conclusion_predefined_functions.html">
+     Conclusion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/04_processing_column_data/05_special_functions_col_and_lit.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F04_processing_column_data/05_special_functions_col_and_lit.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/04_processing_column_data/05_special_functions_col_and_lit.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/04_processing_column_data/05_special_functions_col_and_lit.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="special-functions-col-and-lit">
+<h1>Special Functions - col and lit<a class="headerlink" href="#special-functions-col-and-lit" title="Permalink to this headline">¶</a></h1>
+<p>Let us understand special functions such as col and lit. These functions are typically used to convert the strings to column type.</p>
+<ul class="simple">
+<li><p>First let us create Data Frame for demo purposes.</p></li>
+</ul>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Processing Column Data&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Scott&quot;</span><span class="p">,</span> <span class="s2">&quot;Tiger&quot;</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> 
+                      <span class="s2">&quot;united states&quot;</span><span class="p">,</span> <span class="s2">&quot;+1 123 456 7890&quot;</span><span class="p">,</span> <span class="s2">&quot;123 45 6789&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Henry&quot;</span><span class="p">,</span> <span class="s2">&quot;Ford&quot;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> 
+                      <span class="s2">&quot;India&quot;</span><span class="p">,</span> <span class="s2">&quot;+91 234 567 8901&quot;</span><span class="p">,</span> <span class="s2">&quot;456 78 9123&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Nick&quot;</span><span class="p">,</span> <span class="s2">&quot;Junior&quot;</span><span class="p">,</span> <span class="mf">750.0</span><span class="p">,</span> 
+                      <span class="s2">&quot;united KINGDOM&quot;</span><span class="p">,</span> <span class="s2">&quot;+44 111 111 1111&quot;</span><span class="p">,</span> <span class="s2">&quot;222 33 4444&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Bill&quot;</span><span class="p">,</span> <span class="s2">&quot;Gomes&quot;</span><span class="p">,</span> <span class="mf">1500.0</span><span class="p">,</span> 
+                      <span class="s2">&quot;AUSTRALIA&quot;</span><span class="p">,</span> <span class="s2">&quot;+61 987 654 3210&quot;</span><span class="p">,</span> <span class="s2">&quot;789 12 6118&quot;</span>
+                     <span class="p">)</span>
+                <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span> \
+    <span class="n">createDataFrame</span><span class="p">(</span><span class="n">employees</span><span class="p">,</span>
+                    <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;employee_id INT, first_name STRING, </span>
+<span class="s2">                    last_name STRING, salary FLOAT, nationality STRING,</span>
+<span class="s2">                    phone_number STRING, ssn STRING&quot;&quot;&quot;</span>
+                   <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>For Data Frame APIs such as <code class="docutils literal notranslate"><span class="pre">select</span></code>, <code class="docutils literal notranslate"><span class="pre">groupBy</span></code>, <code class="docutils literal notranslate"><span class="pre">orderBy</span></code> etc we can pass column names as strings.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">,</span> <span class="s2">&quot;last_name&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+---------+
+|first_name|last_name|
++----------+---------+
+|     Scott|    Tiger|
+|     Henry|     Ford|
+|      Nick|   Junior|
+|      Bill|    Gomes|
++----------+---------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;nationality&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------------+-----+
+|   nationality|count|
++--------------+-----+
+|         India|    1|
+|united KINGDOM|    1|
+| united states|    1|
+|     AUSTRALIA|    1|
++--------------+-----+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;employee_id&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+--------------+----------------+-----------+
+|          1|     Scott|    Tiger|1000.0| united states| +1 123 456 7890|123 45 6789|
+|          2|     Henry|     Ford|1250.0|         India|+91 234 567 8901|456 78 9123|
+|          3|      Nick|   Junior| 750.0|united KINGDOM|+44 111 111 1111|222 33 4444|
+|          4|      Bill|    Gomes|1500.0|     AUSTRALIA|+61 987 654 3210|789 12 6118|
++-----------+----------+---------+------+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>If there are no transformations on any column in any function then we should be able to pass all column names as strings.</p></li>
+<li><p>If not we need to pass all columns as type column by using col function.</p></li>
+<li><p>If we want to apply transformations using some of the functions then passing column names as strings will not suffice. We have to pass them as column type.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;last_name&quot;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+---------+
+|first_name|last_name|
++----------+---------+
+|     Scott|    Tiger|
+|     Henry|     Ford|
+|      Nick|   Junior|
+|      Bill|    Gomes|
++----------+---------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">upper</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">),</span> <span class="n">upper</span><span class="p">(</span><span class="s2">&quot;last_name&quot;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">Py4JError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">2</span><span class="n">f0306871c54</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">employeesDF</span><span class="o">.</span> \
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">select</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">),</span> <span class="n">upper</span><span class="p">(</span><span class="s2">&quot;last_name&quot;</span><span class="p">))</span><span class="o">.</span> \
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">show</span><span class="p">()</span>
+
+<span class="nn">/usr/hdp/current/spark2-client/python/pyspark/sql/functions.py</span> in <span class="ni">_</span><span class="nt">(col)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>         <span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="o">.</span><span class="n">_active_spark_context</span>
+<span class="ne">---&gt; </span><span class="mi">42</span>         <span class="n">jc</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">_jvm</span><span class="o">.</span><span class="n">functions</span><span class="p">,</span> <span class="n">name</span><span class="p">)(</span><span class="n">col</span><span class="o">.</span><span class="n">_jc</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">Column</span><span class="p">)</span> <span class="k">else</span> <span class="n">col</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>         <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">jc</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="n">_</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">name</span>
+
+<span class="nn">/usr/hdp/current/spark2-client/python/lib/py4j-0.10.6-src.zip/py4j/java_gateway.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1158</span>         <span class="n">answer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gateway_client</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1159</span>         <span class="n">return_value</span> <span class="o">=</span> <span class="n">get_return_value</span><span class="p">(</span>
+<span class="ne">-&gt; </span><span class="mi">1160</span>             <span class="n">answer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gateway_client</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1161</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1162</span>         <span class="k">for</span> <span class="n">temp_arg</span> <span class="ow">in</span> <span class="n">temp_args</span><span class="p">:</span>
+
+<span class="nn">/usr/hdp/current/spark2-client/python/pyspark/sql/utils.py</span> in <span class="ni">deco</span><span class="nt">(*a, **kw)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">63</span>             <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>         <span class="k">except</span> <span class="n">py4j</span><span class="o">.</span><span class="n">protocol</span><span class="o">.</span><span class="n">Py4JJavaError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>             <span class="n">s</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">java_exception</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
+
+<span class="nn">/usr/hdp/current/spark2-client/python/lib/py4j-0.10.6-src.zip/py4j/protocol.py</span> in <span class="ni">get_return_value</span><span class="nt">(answer, gateway_client, target_id, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span>                 <span class="k">raise</span> <span class="n">Py4JError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">323</span>                     <span class="s2">&quot;An error occurred while calling </span><span class="si">{0}{1}{2}</span><span class="s2">. Trace:</span><span class="se">\n</span><span class="si">{3}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span>
+<span class="ne">--&gt; </span><span class="mi">324</span>                     <span class="nb">format</span><span class="p">(</span><span class="n">target_id</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span>             <span class="k">raise</span> <span class="n">Py4JError</span><span class="p">(</span>
+
+<span class="ne">Py4JError</span>: An error occurred while calling z:org.apache.spark.sql.functions.upper. Trace:
+<span class="n">py4j</span><span class="o">.</span><span class="n">Py4JException</span><span class="p">:</span> <span class="n">Method</span> <span class="n">upper</span><span class="p">([</span><span class="k">class</span> <span class="nc">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">String</span><span class="p">])</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">exist</span>
+	<span class="n">at</span> <span class="n">py4j</span><span class="o">.</span><span class="n">reflection</span><span class="o">.</span><span class="n">ReflectionEngine</span><span class="o">.</span><span class="n">getMethod</span><span class="p">(</span><span class="n">ReflectionEngine</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">318</span><span class="p">)</span>
+	<span class="n">at</span> <span class="n">py4j</span><span class="o">.</span><span class="n">reflection</span><span class="o">.</span><span class="n">ReflectionEngine</span><span class="o">.</span><span class="n">getMethod</span><span class="p">(</span><span class="n">ReflectionEngine</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">339</span><span class="p">)</span>
+	<span class="n">at</span> <span class="n">py4j</span><span class="o">.</span><span class="n">Gateway</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">Gateway</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">276</span><span class="p">)</span>
+	<span class="n">at</span> <span class="n">py4j</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">AbstractCommand</span><span class="o">.</span><span class="n">invokeMethod</span><span class="p">(</span><span class="n">AbstractCommand</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">132</span><span class="p">)</span>
+	<span class="n">at</span> <span class="n">py4j</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">CallCommand</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">CallCommand</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">79</span><span class="p">)</span>
+	<span class="n">at</span> <span class="n">py4j</span><span class="o">.</span><span class="n">GatewayConnection</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">GatewayConnection</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">214</span><span class="p">)</span>
+	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">Thread</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">748</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">col</span></code> is the function which will convert column name from string type to <strong>Column</strong> type. We can also refer column names as <strong>Column</strong> type using Data Frame name.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">upper</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">)),</span> <span class="n">upper</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;last_name&quot;</span><span class="p">)))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------------+----------------+
+|upper(first_name)|upper(last_name)|
++-----------------+----------------+
+|            SCOTT|           TIGER|
+|            HENRY|            FORD|
+|             NICK|          JUNIOR|
+|             BILL|           GOMES|
++-----------------+----------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;nationality&quot;</span><span class="p">)))</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+------------------+-----+
+|upper(nationality)|count|
++------------------+-----+
+|    UNITED KINGDOM|    1|
+|             INDIA|    1|
+|         AUSTRALIA|    1|
+|     UNITED STATES|    1|
++------------------+-----+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Also, if we want to use functions such as <code class="docutils literal notranslate"><span class="pre">alias</span></code>, <code class="docutils literal notranslate"><span class="pre">desc</span></code> etc on columns then we have to pass the column names as column type (not as strings).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This will fail as the function desc is available only on column type.</span>
+<span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;employee_id&quot;</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">14</span><span class="o">-</span><span class="n">fd95955a04d4</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># This will fail as the function desc is available only on column type.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">employeesDF</span><span class="o">.</span> \
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;employee_id&quot;</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span> \
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">show</span><span class="p">()</span>
+
+<span class="ne">AttributeError</span>: &#39;str&#39; object has no attribute &#39;desc&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can invoke desc on columns which are of type column</span>
+<span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;employee_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+--------------+----------------+-----------+
+|          4|      Bill|    Gomes|1500.0|     AUSTRALIA|+61 987 654 3210|789 12 6118|
+|          3|      Nick|   Junior| 750.0|united KINGDOM|+44 111 111 1111|222 33 4444|
+|          2|     Henry|     Ford|1250.0|         India|+91 234 567 8901|456 78 9123|
+|          1|     Scott|    Tiger|1000.0| united states| +1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+--------------+----------------+-----------+
+|          1|     Scott|    Tiger|1000.0| united states| +1 123 456 7890|123 45 6789|
+|          3|      Nick|   Junior| 750.0|united KINGDOM|+44 111 111 1111|222 33 4444|
+|          2|     Henry|     Ford|1250.0|         India|+91 234 567 8901|456 78 9123|
+|          4|      Bill|    Gomes|1500.0|     AUSTRALIA|+61 987 654 3210|789 12 6118|
++-----------+----------+---------+------+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alternative - we can also refer column names using Data Frame like this</span>
+<span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">employeesDF</span><span class="p">[</span><span class="s1">&#39;first_name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+--------------+----------------+-----------+
+|          4|      Bill|    Gomes|1500.0|     AUSTRALIA|+61 987 654 3210|789 12 6118|
+|          2|     Henry|     Ford|1250.0|         India|+91 234 567 8901|456 78 9123|
+|          3|      Nick|   Junior| 750.0|united KINGDOM|+44 111 111 1111|222 33 4444|
+|          1|     Scott|    Tiger|1000.0| united states| +1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alternative - we can also refer column names using Data Frame like this</span>
+<span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">employeesDF</span><span class="o">.</span><span class="n">first_name</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+--------------+----------------+-----------+
+|          4|      Bill|    Gomes|1500.0|     AUSTRALIA|+61 987 654 3210|789 12 6118|
+|          2|     Henry|     Ford|1250.0|         India|+91 234 567 8901|456 78 9123|
+|          3|      Nick|   Junior| 750.0|united KINGDOM|+44 111 111 1111|222 33 4444|
+|          1|     Scott|    Tiger|1000.0| united states| +1 123 456 7890|123 45 6789|
++-----------+----------+---------+------+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Sometimes, we want to add a literal to the column values. For example, we might want to concatenate first_name and last_name separated by comma and space in between.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">concat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same as above</span>
+<span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">concat</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">),</span> <span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;last_name&quot;</span><span class="p">)))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+Py4JJavaError                             Traceback (most recent call last)
+/usr/hdp/current/spark2-client/python/pyspark/sql/utils.py in deco(*a, **kw)
+     62         try:
+---&gt; 63             return f(*a, **kw)
+     64         except py4j.protocol.Py4JJavaError as e:
+
+/usr/hdp/current/spark2-client/python/lib/py4j-0.10.6-src.zip/py4j/protocol.py in get_return_value(answer, gateway_client, target_id, name)
+    319                     &quot;An error occurred while calling {0}{1}{2}.\n&quot;.
+--&gt; 320                     format(target_id, &quot;.&quot;, name), value)
+    321             else:
+
+Py4JJavaError: An error occurred while calling o80.select.
+: org.apache.spark.sql.AnalysisException: cannot resolve &#39;`, `&#39; given input columns: [nationality, last_name, employee_id, phone_number, ssn, first_name, salary];;
+&#39;Project [concat(first_name#1, &#39;, , last_name#2) AS concat(first_name, , , last_name)#212]
++- AnalysisBarrier
+      +- LogicalRDD [employee_id#0, first_name#1, last_name#2, salary#3, nationality#4, phone_number#5, ssn#6], false
+
+	at org.apache.spark.sql.catalyst.analysis.package$AnalysisErrorAt.failAnalysis(package.scala:42)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:88)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:85)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:289)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:289)
+	at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:288)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4$$anonfun$apply$11.apply(TreeNode.scala:335)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+	at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:104)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:333)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:187)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:304)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:306)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:187)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:304)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:95)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:95)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$1.apply(QueryPlan.scala:107)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$1.apply(QueryPlan.scala:107)
+	at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpression$1(QueryPlan.scala:106)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:118)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1$1.apply(QueryPlan.scala:122)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+	at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:104)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:122)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$2.apply(QueryPlan.scala:127)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:187)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.mapExpressions(QueryPlan.scala:127)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressionsUp(QueryPlan.scala:95)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:85)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:80)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.foreachUp(TreeNode.scala:127)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$class.checkAnalysis(CheckAnalysis.scala:80)
+	at org.apache.spark.sql.catalyst.analysis.Analyzer.checkAnalysis(Analyzer.scala:92)
+	at org.apache.spark.sql.catalyst.analysis.Analyzer.executeAndCheck(Analyzer.scala:105)
+	at org.apache.spark.sql.execution.QueryExecution.analyzed$lzycompute(QueryExecution.scala:57)
+	at org.apache.spark.sql.execution.QueryExecution.analyzed(QueryExecution.scala:55)
+	at org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:47)
+	at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:74)
+	at org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$withPlan(Dataset.scala:3295)
+	at org.apache.spark.sql.Dataset.select(Dataset.scala:1307)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.GatewayConnection.run(GatewayConnection.java:214)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+During handling of the above exception, another exception occurred:
+
+AnalysisException                         Traceback (most recent call last)
+&lt;ipython-input-20-a50db305857c&gt; in &lt;module&gt;
+      1 # Same as above
+      2 employeesDF. \
+----&gt; 3     select(concat(col(&quot;first_name&quot;), &quot;, &quot;, col(&quot;last_name&quot;))). \
+      4     show()
+
+/usr/hdp/current/spark2-client/python/pyspark/sql/dataframe.py in select(self, *cols)
+   1200         [Row(name=u&#39;Alice&#39;, age=12), Row(name=u&#39;Bob&#39;, age=15)]
+   1201         &quot;&quot;&quot;
+-&gt; 1202         jdf = self._jdf.select(self._jcols(*cols))
+   1203         return DataFrame(jdf, self.sql_ctx)
+   1204 
+
+/usr/hdp/current/spark2-client/python/lib/py4j-0.10.6-src.zip/py4j/java_gateway.py in __call__(self, *args)
+   1158         answer = self.gateway_client.send_command(command)
+   1159         return_value = get_return_value(
+-&gt; 1160             answer, self.gateway_client, self.target_id, self.name)
+   1161 
+   1162         for temp_arg in temp_args:
+
+/usr/hdp/current/spark2-client/python/pyspark/sql/utils.py in deco(*a, **kw)
+     67                                              e.java_exception.getStackTrace()))
+     68             if s.startswith(&#39;org.apache.spark.sql.AnalysisException: &#39;):
+---&gt; 69                 raise AnalysisException(s.split(&#39;: &#39;, 1)[1], stackTrace)
+     70             if s.startswith(&#39;org.apache.spark.sql.catalyst.analysis&#39;):
+     71                 raise AnalysisException(s.split(&#39;: &#39;, 1)[1], stackTrace)
+
+AnalysisException: &quot;cannot resolve &#39;`, `&#39; given input columns: [nationality, last_name, employee_id, phone_number, ssn, first_name, salary];;\n&#39;Project [concat(first_name#1, &#39;, , last_name#2) AS concat(first_name, , , last_name)#212]\n+- AnalysisBarrier\n      +- LogicalRDD [employee_id#0, first_name#1, last_name#2, salary#3, nationality#4, phone_number#5, ssn#6], false\n&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Referring columns using Data Frame</span>
+<span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">concat</span><span class="p">(</span><span class="n">employeesDF</span><span class="p">[</span><span class="s2">&quot;first_name&quot;</span><span class="p">],</span> <span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="n">employeesDF</span><span class="p">[</span><span class="s2">&quot;last_name&quot;</span><span class="p">]))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+Py4JJavaError                             Traceback (most recent call last)
+/usr/hdp/current/spark2-client/python/pyspark/sql/utils.py in deco(*a, **kw)
+     62         try:
+---&gt; 63             return f(*a, **kw)
+     64         except py4j.protocol.Py4JJavaError as e:
+
+/usr/hdp/current/spark2-client/python/lib/py4j-0.10.6-src.zip/py4j/protocol.py in get_return_value(answer, gateway_client, target_id, name)
+    319                     &quot;An error occurred while calling {0}{1}{2}.\n&quot;.
+--&gt; 320                     format(target_id, &quot;.&quot;, name), value)
+    321             else:
+
+Py4JJavaError: An error occurred while calling o80.select.
+: org.apache.spark.sql.AnalysisException: cannot resolve &#39;`, `&#39; given input columns: [nationality, last_name, employee_id, phone_number, ssn, first_name, salary];;
+&#39;Project [concat(first_name#1, &#39;, , last_name#2) AS concat(first_name, , , last_name)#214]
++- AnalysisBarrier
+      +- LogicalRDD [employee_id#0, first_name#1, last_name#2, salary#3, nationality#4, phone_number#5, ssn#6], false
+
+	at org.apache.spark.sql.catalyst.analysis.package$AnalysisErrorAt.failAnalysis(package.scala:42)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:88)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:85)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:289)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:289)
+	at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:288)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4$$anonfun$apply$11.apply(TreeNode.scala:335)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+	at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:104)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:333)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:187)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:304)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:306)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:187)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:304)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:286)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:95)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:95)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$1.apply(QueryPlan.scala:107)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$1.apply(QueryPlan.scala:107)
+	at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpression$1(QueryPlan.scala:106)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:118)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1$1.apply(QueryPlan.scala:122)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+	at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:104)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:122)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$2.apply(QueryPlan.scala:127)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:187)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.mapExpressions(QueryPlan.scala:127)
+	at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressionsUp(QueryPlan.scala:95)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:85)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:80)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.foreachUp(TreeNode.scala:127)
+	at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$class.checkAnalysis(CheckAnalysis.scala:80)
+	at org.apache.spark.sql.catalyst.analysis.Analyzer.checkAnalysis(Analyzer.scala:92)
+	at org.apache.spark.sql.catalyst.analysis.Analyzer.executeAndCheck(Analyzer.scala:105)
+	at org.apache.spark.sql.execution.QueryExecution.analyzed$lzycompute(QueryExecution.scala:57)
+	at org.apache.spark.sql.execution.QueryExecution.analyzed(QueryExecution.scala:55)
+	at org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:47)
+	at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:74)
+	at org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$withPlan(Dataset.scala:3295)
+	at org.apache.spark.sql.Dataset.select(Dataset.scala:1307)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.GatewayConnection.run(GatewayConnection.java:214)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+During handling of the above exception, another exception occurred:
+
+AnalysisException                         Traceback (most recent call last)
+&lt;ipython-input-23-3ca9edfc85ec&gt; in &lt;module&gt;
+      1 # Referring columns using Data Frame
+      2 employeesDF. \
+----&gt; 3     select(concat(employeesDF[&quot;first_name&quot;], &quot;, &quot;, employeesDF[&quot;last_name&quot;])). \
+      4     show()
+
+/usr/hdp/current/spark2-client/python/pyspark/sql/dataframe.py in select(self, *cols)
+   1200         [Row(name=u&#39;Alice&#39;, age=12), Row(name=u&#39;Bob&#39;, age=15)]
+   1201         &quot;&quot;&quot;
+-&gt; 1202         jdf = self._jdf.select(self._jcols(*cols))
+   1203         return DataFrame(jdf, self.sql_ctx)
+   1204 
+
+/usr/hdp/current/spark2-client/python/lib/py4j-0.10.6-src.zip/py4j/java_gateway.py in __call__(self, *args)
+   1158         answer = self.gateway_client.send_command(command)
+   1159         return_value = get_return_value(
+-&gt; 1160             answer, self.gateway_client, self.target_id, self.name)
+   1161 
+   1162         for temp_arg in temp_args:
+
+/usr/hdp/current/spark2-client/python/pyspark/sql/utils.py in deco(*a, **kw)
+     67                                              e.java_exception.getStackTrace()))
+     68             if s.startswith(&#39;org.apache.spark.sql.AnalysisException: &#39;):
+---&gt; 69                 raise AnalysisException(s.split(&#39;: &#39;, 1)[1], stackTrace)
+     70             if s.startswith(&#39;org.apache.spark.sql.catalyst.analysis&#39;):
+     71                 raise AnalysisException(s.split(&#39;: &#39;, 1)[1], stackTrace)
+
+AnalysisException: &quot;cannot resolve &#39;`, `&#39; given input columns: [nationality, last_name, employee_id, phone_number, ssn, first_name, salary];;\n&#39;Project [concat(first_name#1, &#39;, , last_name#2) AS concat(first_name, , , last_name)#214]\n+- AnalysisBarrier\n      +- LogicalRDD [employee_id#0, first_name#1, last_name#2, salary#3, nationality#4, phone_number#5, ssn#6], false\n&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>If we pass the literals directly in the form of string or numeric type, then it will fail. It will search for column by name using the string passed. In this example, it will check for column by name <code class="docutils literal notranslate"><span class="pre">,</span> </code> (comma followed by space).</p></li>
+<li><p>We have to convert literals to column type by using <code class="docutils literal notranslate"><span class="pre">lit</span></code> function.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">concat</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">lit</span>
+
+<span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">concat</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">),</span> 
+                  <span class="n">lit</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">),</span> 
+                  <span class="n">col</span><span class="p">(</span><span class="s2">&quot;last_name&quot;</span><span class="p">)</span>
+                 <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;full_name&quot;</span><span class="p">)</span>
+          <span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+------------+
+|full_name   |
++------------+
+|Scott, Tiger|
+|Henry, Ford |
+|Nick, Junior|
+|Bill, Gomes |
++------------+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./04_processing_column_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="04_categories_of_functions.html" title="previous page">Categories of Functions</a>
+    <a class='right-next' id="next-link" href="06_common_string_manipulation_functions.html" title="next page">Common String Manipulation Functions</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

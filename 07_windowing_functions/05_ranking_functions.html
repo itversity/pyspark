@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ranking Functions &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using LEAD or LAG" href="06_using_lead_or_lag.html" />
+    <link rel="prev" title="Using rowsBetween and rangeBetween" href="04_using_rowsBetween_and_rangeBetween.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_windowing_functions.html">
+   Windowing Functions
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_overview_of_windowing_functions.html">
+     Overview of Windowing Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_aggregate_functions.html">
+     Aggregate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_using_rowsBetween_and_rangeBetween.html">
+     Using rowsBetween and rangeBetween
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Ranking Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_using_lead_or_lag.html">
+     Using LEAD or LAG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_using_first_and_last_functions.html">
+     Using first and last functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_aggregate_functions_examples.html">
+     Aggregate Functions Examples
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/07_windowing_functions/05_ranking_functions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F07_windowing_functions/05_ranking_functions.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/07_windowing_functions/05_ranking_functions.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/07_windowing_functions/05_ranking_functions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ranking-functions">
+<h1>Ranking Functions<a class="headerlink" href="#ranking-functions" title="Permalink to this headline">¶</a></h1>
+<p>We can use ranking functions to assign ranks to a particular record within a partition.</p>
+<ul class="simple">
+<li><p>Sparse Rank - rank</p></li>
+<li><p>Dense Rank - dense_rank</p></li>
+<li><p>Assigning Row Numbers - row_number</p></li>
+<li><p>Percentage Rank - percent_rank</p></li>
+</ul>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Windowing Functions&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;spark.sql.shuffle.partitions&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Let us assign ranks based up on departure delay from each of the airport.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">airtraffic_path</span> <span class="o">=</span> <span class="s2">&quot;/public/airtraffic_all/airtraffic-part/flightmonth=200801&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">airtraffic</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span> \
+    <span class="n">read</span><span class="o">.</span> \
+    <span class="n">parquet</span><span class="p">(</span><span class="n">airtraffic_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">lpad</span><span class="p">,</span> <span class="n">concat</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">rank</span><span class="p">,</span> <span class="n">dense_rank</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">percent_rank</span><span class="p">,</span> <span class="n">row_number</span><span class="p">,</span> <span class="nb">round</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.window</span> <span class="kn">import</span> <span class="n">Window</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span> \
+    <span class="n">partitionBy</span><span class="p">(</span><span class="s2">&quot;FlightDate&quot;</span><span class="p">,</span> <span class="s2">&quot;Origin&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;DepDelay&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">airtraffic</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;IsDepDelayed = &#39;YES&#39; and Cancelled = 0&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">concat</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> 
+                  <span class="n">lpad</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">),</span> 
+                  <span class="n">lpad</span><span class="p">(</span><span class="s2">&quot;DayOfMonth&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">)</span>
+                 <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;FlightDate&quot;</span><span class="p">),</span>
+           <span class="s2">&quot;Origin&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;UniqueCarrier&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;FlightNum&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;CRSDepTime&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;IsDepDelayed&quot;</span><span class="p">,</span>
+           <span class="n">col</span><span class="p">(</span><span class="s2">&quot;DepDelay&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;DepDelay&quot;</span><span class="p">)</span>
+          <span class="p">)</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;srank&quot;</span><span class="p">,</span> <span class="n">rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;drank&quot;</span><span class="p">,</span> <span class="n">dense_rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;prank&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">percent_rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">spec</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;rn&quot;</span><span class="p">,</span> <span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;FlightDate&quot;</span><span class="p">,</span> <span class="s2">&quot;Origin&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;DepDelay&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+------+-------------+---------+----------+------------+--------+-----+-----+-----+---+
+|FlightDate|Origin|UniqueCarrier|FlightNum|CRSDepTime|IsDepDelayed|DepDelay|srank|drank|prank| rn|
++----------+------+-------------+---------+----------+------------+--------+-----+-----+-----+---+
+|  20080101|   ABE|           YV|     7138|      1741|         YES|     175|    1|    1|  0.0|  1|
+|  20080101|   ABE|           YV|     7263|      1230|         YES|     137|    2|    2| 0.14|  2|
+|  20080101|   ABE|           9E|     2940|      1215|         YES|      70|    3|    3| 0.29|  3|
+|  20080101|   ABE|           9E|     2936|      1615|         YES|      34|    4|    4| 0.43|  4|
+|  20080101|   ABE|           XE|     2594|      1740|         YES|      34|    4|    4| 0.43|  5|
+|  20080101|   ABE|           XE|     2578|      1410|         YES|      22|    6|    5| 0.71|  6|
+|  20080101|   ABE|           OH|     5457|      1720|         YES|      14|    7|    6| 0.86|  7|
+|  20080101|   ABE|           OO|     5873|       720|         YES|       1|    8|    7|  1.0|  8|
+|  20080101|   ABI|           MQ|     3214|      1735|         YES|       3|    1|    1|  0.0|  1|
+|  20080101|   ABQ|           WN|      823|      2045|         YES|     218|    1|    1|  0.0|  1|
+|  20080101|   ABQ|           WN|      357|      1525|         YES|     171|    2|    2| 0.02|  2|
+|  20080101|   ABQ|           AA|     1814|       925|         YES|     100|    3|    3| 0.04|  3|
+|  20080101|   ABQ|           WN|     1178|      1845|         YES|      94|    4|    4| 0.06|  4|
+|  20080101|   ABQ|           WN|     2497|      1825|         YES|      93|    5|    5| 0.09|  5|
+|  20080101|   ABQ|           WN|     3481|      1500|         YES|      78|    6|    6| 0.11|  6|
+|  20080101|   ABQ|           WN|     1328|      1245|         YES|      78|    6|    6| 0.11|  7|
+|  20080101|   ABQ|           XE|      221|      1850|         YES|      68|    8|    7| 0.15|  8|
+|  20080101|   ABQ|           DL|     1601|       740|         YES|      65|    9|    8| 0.17|  9|
+|  20080101|   ABQ|           WN|       45|      1435|         YES|      64|   10|    9| 0.19| 10|
+|  20080101|   ABQ|           WN|     2788|      1755|         YES|      53|   11|   10| 0.21| 11|
++----------+------+-------------+---------+----------+------------+--------+-----+-----+-----+---+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Let us assign ranks to each employee with in their respective department based up on their salary.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesPath</span> <span class="o">=</span> <span class="s1">&#39;/public/hr_db/employees&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span> \
+    <span class="n">read</span><span class="o">.</span> \
+    <span class="nb">format</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">option</span><span class="p">(</span><span class="s1">&#39;sep&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">schema</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;employee_id INT, </span>
+<span class="s1">              first_name STRING, </span>
+<span class="s1">              last_name STRING, </span>
+<span class="s1">              email STRING,</span>
+<span class="s1">              phone_number STRING, </span>
+<span class="s1">              hire_date STRING, </span>
+<span class="s1">              job_id STRING, </span>
+<span class="s1">              salary FLOAT,</span>
+<span class="s1">              commission_pct STRING,</span>
+<span class="s1">              manager_id STRING, </span>
+<span class="s1">              department_id STRING</span>
+<span class="s1">            &#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">load</span><span class="p">(</span><span class="n">employeesPath</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="s1">&#39;employee_id&#39;</span><span class="p">,</span> 
+           <span class="n">col</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">),</span> 
+           <span class="s1">&#39;salary&#39;</span>
+          <span class="p">)</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+-------------+-------+
+|employee_id|department_id| salary|
++-----------+-------------+-------+
+|        178|         null| 7000.0|
+|        200|           10| 4400.0|
+|        202|           20| 6000.0|
+|        201|           20|13000.0|
+|        119|           30| 2500.0|
+|        118|           30| 2600.0|
+|        117|           30| 2800.0|
+|        116|           30| 2900.0|
+|        115|           30| 3100.0|
+|        114|           30|11000.0|
+|        203|           40| 6500.0|
+|        132|           50| 2100.0|
+|        128|           50| 2200.0|
+|        136|           50| 2200.0|
+|        135|           50| 2400.0|
+|        127|           50| 2400.0|
+|        131|           50| 2500.0|
+|        140|           50| 2500.0|
+|        191|           50| 2500.0|
+|        144|           50| 2500.0|
++-----------+-------------+-------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span> \
+    <span class="n">partitionBy</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="s1">&#39;employee_id&#39;</span><span class="p">,</span> 
+           <span class="n">col</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;department_id&#39;</span><span class="p">),</span> 
+           <span class="s1">&#39;salary&#39;</span>
+          <span class="p">)</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;srank&quot;</span><span class="p">,</span> <span class="n">rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;drank&quot;</span><span class="p">,</span> <span class="n">dense_rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;prank&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">percent_rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">spec</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;rn&quot;</span><span class="p">,</span> <span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;department_id&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;salary&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">(</span><span class="mi">107</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+-------------+-------+-----+-----+-----+---+
+|employee_id|department_id| salary|srank|drank|prank| rn|
++-----------+-------------+-------+-----+-----+-----+---+
+|        178|         null| 7000.0|    1|    1|  0.0|  1|
+|        200|           10| 4400.0|    1|    1|  0.0|  1|
+|        201|           20|13000.0|    1|    1|  0.0|  1|
+|        202|           20| 6000.0|    2|    2|  1.0|  2|
+|        114|           30|11000.0|    1|    1|  0.0|  1|
+|        115|           30| 3100.0|    2|    2|  0.2|  2|
+|        116|           30| 2900.0|    3|    3|  0.4|  3|
+|        117|           30| 2800.0|    4|    4|  0.6|  4|
+|        118|           30| 2600.0|    5|    5|  0.8|  5|
+|        119|           30| 2500.0|    6|    6|  1.0|  6|
+|        203|           40| 6500.0|    1|    1|  0.0|  1|
+|        121|           50| 8200.0|    1|    1|  0.0|  1|
+|        120|           50| 8000.0|    2|    2| 0.02|  2|
+|        122|           50| 7900.0|    3|    3| 0.05|  3|
+|        123|           50| 6500.0|    4|    4| 0.07|  4|
+|        124|           50| 5800.0|    5|    5| 0.09|  5|
+|        184|           50| 4200.0|    6|    6| 0.11|  6|
+|        185|           50| 4100.0|    7|    7| 0.14|  7|
+|        192|           50| 4000.0|    8|    8| 0.16|  8|
+|        193|           50| 3900.0|    9|    9| 0.18|  9|
+|        188|           50| 3800.0|   10|   10|  0.2| 10|
+|        189|           50| 3600.0|   11|   11| 0.23| 12|
+|        137|           50| 3600.0|   11|   11| 0.23| 11|
+|        141|           50| 3500.0|   13|   12| 0.27| 13|
+|        186|           50| 3400.0|   14|   13|  0.3| 14|
+|        133|           50| 3300.0|   15|   14| 0.32| 16|
+|        129|           50| 3300.0|   15|   14| 0.32| 15|
+|        138|           50| 3200.0|   17|   15| 0.36| 17|
+|        125|           50| 3200.0|   17|   15| 0.36| 18|
+|        180|           50| 3200.0|   17|   15| 0.36| 19|
+|        194|           50| 3200.0|   17|   15| 0.36| 20|
+|        196|           50| 3100.0|   21|   16| 0.45| 23|
+|        142|           50| 3100.0|   21|   16| 0.45| 21|
+|        181|           50| 3100.0|   21|   16| 0.45| 22|
+|        197|           50| 3000.0|   24|   17| 0.52| 25|
+|        187|           50| 3000.0|   24|   17| 0.52| 24|
+|        134|           50| 2900.0|   26|   18| 0.57| 26|
+|        190|           50| 2900.0|   26|   18| 0.57| 27|
+|        130|           50| 2800.0|   28|   19| 0.61| 28|
+|        195|           50| 2800.0|   28|   19| 0.61| 30|
+|        183|           50| 2800.0|   28|   19| 0.61| 29|
+|        126|           50| 2700.0|   31|   20| 0.68| 32|
+|        139|           50| 2700.0|   31|   20| 0.68| 31|
+|        198|           50| 2600.0|   33|   21| 0.73| 34|
+|        143|           50| 2600.0|   33|   21| 0.73| 33|
+|        199|           50| 2600.0|   33|   21| 0.73| 35|
+|        144|           50| 2500.0|   36|   22|  0.8| 38|
+|        182|           50| 2500.0|   36|   22|  0.8| 39|
+|        191|           50| 2500.0|   36|   22|  0.8| 40|
+|        140|           50| 2500.0|   36|   22|  0.8| 37|
+|        131|           50| 2500.0|   36|   22|  0.8| 36|
+|        127|           50| 2400.0|   41|   23| 0.91| 41|
+|        135|           50| 2400.0|   41|   23| 0.91| 42|
+|        128|           50| 2200.0|   43|   24| 0.95| 43|
+|        136|           50| 2200.0|   43|   24| 0.95| 44|
+|        132|           50| 2100.0|   45|   25|  1.0| 45|
+|        103|           60| 9000.0|    1|    1|  0.0|  1|
+|        104|           60| 6000.0|    2|    2| 0.25|  2|
+|        105|           60| 4800.0|    3|    3|  0.5|  3|
+|        106|           60| 4800.0|    3|    3|  0.5|  4|
+|        107|           60| 4200.0|    5|    4|  1.0|  5|
+|        204|           70|10000.0|    1|    1|  0.0|  1|
+|        145|           80|14000.0|    1|    1|  0.0|  1|
+|        146|           80|13500.0|    2|    2| 0.03|  2|
+|        147|           80|12000.0|    3|    3| 0.06|  3|
+|        168|           80|11500.0|    4|    4| 0.09|  4|
+|        148|           80|11000.0|    5|    5| 0.12|  5|
+|        174|           80|11000.0|    5|    5| 0.12|  6|
+|        162|           80|10500.0|    7|    6| 0.18|  8|
+|        149|           80|10500.0|    7|    6| 0.18|  7|
+|        169|           80|10000.0|    9|    7| 0.24| 11|
+|        156|           80|10000.0|    9|    7| 0.24| 10|
+|        150|           80|10000.0|    9|    7| 0.24|  9|
+|        170|           80| 9600.0|   12|    8| 0.33| 12|
+|        163|           80| 9500.0|   13|    9| 0.36| 15|
+|        157|           80| 9500.0|   13|    9| 0.36| 14|
+|        151|           80| 9500.0|   13|    9| 0.36| 13|
+|        158|           80| 9000.0|   16|   10| 0.45| 17|
+|        152|           80| 9000.0|   16|   10| 0.45| 16|
+|        175|           80| 8800.0|   18|   11| 0.52| 18|
+|        176|           80| 8600.0|   19|   12| 0.55| 19|
+|        177|           80| 8400.0|   20|   13| 0.58| 20|
+|        159|           80| 8000.0|   21|   14| 0.61| 22|
+|        153|           80| 8000.0|   21|   14| 0.61| 21|
+|        160|           80| 7500.0|   23|   15| 0.67| 24|
+|        154|           80| 7500.0|   23|   15| 0.67| 23|
+|        171|           80| 7400.0|   25|   16| 0.73| 25|
+|        172|           80| 7300.0|   26|   17| 0.76| 26|
+|        164|           80| 7200.0|   27|   18| 0.79| 27|
+|        155|           80| 7000.0|   28|   19| 0.82| 28|
+|        161|           80| 7000.0|   28|   19| 0.82| 29|
+|        165|           80| 6800.0|   30|   20| 0.88| 30|
+|        166|           80| 6400.0|   31|   21| 0.91| 31|
+|        167|           80| 6200.0|   32|   22| 0.94| 32|
+|        179|           80| 6200.0|   32|   22| 0.94| 33|
+|        173|           80| 6100.0|   34|   23|  1.0| 34|
+|        100|           90|24000.0|    1|    1|  0.0|  1|
+|        101|           90|17000.0|    2|    2|  0.5|  2|
+|        102|           90|17000.0|    2|    2|  0.5|  3|
+|        108|          100|12000.0|    1|    1|  0.0|  1|
+|        109|          100| 9000.0|    2|    2|  0.2|  2|
+|        110|          100| 8200.0|    3|    3|  0.4|  3|
+|        112|          100| 7800.0|    4|    4|  0.6|  4|
+|        111|          100| 7700.0|    5|    5|  0.8|  5|
+|        113|          100| 6900.0|    6|    6|  1.0|  6|
+|        205|          110|12000.0|    1|    1|  0.0|  1|
+|        206|          110| 8300.0|    2|    2|  1.0|  2|
++-----------+-------------+-------+-----+-----+-----+---+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./07_windowing_functions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="04_using_rowsBetween_and_rangeBetween.html" title="previous page">Using rowsBetween and rangeBetween</a>
+    <a class='right-next' id="next-link" href="06_using_lead_or_lag.html" title="next page">Using LEAD or LAG</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

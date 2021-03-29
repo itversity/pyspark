@@ -1,0 +1,765 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using CASE and WHEN &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Conclusion" href="20_conclusion_predefined_functions.html" />
+    <link rel="prev" title="Dealing with Nulls" href="18_dealing_with_nulls.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_processing_column_data.html">
+   Processing Column Data
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_predefined_functions.html">
+     Pre-defined Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_create_dummy_dataframes.html">
+     Create Dummy Data Frame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_categories_of_functions.html">
+     Categories of Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_special_functions_col_and_lit.html">
+     Special Functions - col and lit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_common_string_manipulation_functions.html">
+     Common String Manipulation Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_extracting_strings_using_substring.html">
+     Extracting Strings using substring
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08_extracting_strings_using_split.html">
+     Extracting Strings using split
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_padding_characters_around_strings.html">
+     Padding Characters around Strings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_trimming_characters_from_strings.html">
+     Trimming Characters from Strings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11_date_and_time_manipulation_functions.html">
+     Date and Time Manipulation Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12_date_and_time_arithmetic.html">
+     Date and Time Arithmetic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="13_using_date_and_time_trunc_functions.html">
+     Using Date and Time Trunc Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="14_date_and_time_extract_functions.html">
+     Date and Time Extract Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="15_using_to_date_and_to_timestamp.html">
+     Using to_date and to_timestamp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="16_using_date_format_function.html">
+     Using date_format Function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="17_dealing_with_unix_timestamp.html">
+     Dealing with Unix Timestamp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="18_dealing_with_nulls.html">
+     Dealing with Nulls
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Using CASE and WHEN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="20_conclusion_predefined_functions.html">
+     Conclusion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/04_processing_column_data/19_using_case_and_when.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F04_processing_column_data/19_using_case_and_when.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/04_processing_column_data/19_using_case_and_when.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/04_processing_column_data/19_using_case_and_when.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="using-case-and-when">
+<h1>Using CASE and WHEN<a class="headerlink" href="#using-case-and-when" title="Permalink to this headline">¶</a></h1>
+<p>Let us understand how to perform conditional operations using <code class="docutils literal notranslate"><span class="pre">CASE</span></code> and <code class="docutils literal notranslate"><span class="pre">WHEN</span></code> in Spark.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CASE</span></code> and <code class="docutils literal notranslate"><span class="pre">WHEN</span></code> is typically used to apply transformations based up on conditions. We can use <code class="docutils literal notranslate"><span class="pre">CASE</span></code> and <code class="docutils literal notranslate"><span class="pre">WHEN</span></code> similar to SQL using <code class="docutils literal notranslate"><span class="pre">expr</span></code> or <code class="docutils literal notranslate"><span class="pre">selectExpr</span></code>.</p></li>
+<li><p>If we want to use APIs, Spark provides functions such as <code class="docutils literal notranslate"><span class="pre">when</span></code> and <code class="docutils literal notranslate"><span class="pre">otherwise</span></code>. <code class="docutils literal notranslate"><span class="pre">when</span></code> is available as part of <code class="docutils literal notranslate"><span class="pre">pyspark.sql.functions</span></code>. On top of column type that is generated using <code class="docutils literal notranslate"><span class="pre">when</span></code> we should be able to invoke <code class="docutils literal notranslate"><span class="pre">otherwise</span></code>.</p></li>
+</ul>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Processing Column Data&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employees</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Scott&quot;</span><span class="p">,</span> <span class="s2">&quot;Tiger&quot;</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>
+                      <span class="s2">&quot;united states&quot;</span><span class="p">,</span> <span class="s2">&quot;+1 123 456 7890&quot;</span><span class="p">,</span> <span class="s2">&quot;123 45 6789&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Henry&quot;</span><span class="p">,</span> <span class="s2">&quot;Ford&quot;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="s2">&quot;India&quot;</span><span class="p">,</span> <span class="s2">&quot;+91 234 567 8901&quot;</span><span class="p">,</span> <span class="s2">&quot;456 78 9123&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Nick&quot;</span><span class="p">,</span> <span class="s2">&quot;Junior&quot;</span><span class="p">,</span> <span class="mf">750.0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                      <span class="s2">&quot;united KINGDOM&quot;</span><span class="p">,</span> <span class="s2">&quot;+44 111 111 1111&quot;</span><span class="p">,</span> <span class="s2">&quot;222 33 4444&quot;</span>
+                     <span class="p">),</span>
+                     <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Bill&quot;</span><span class="p">,</span> <span class="s2">&quot;Gomes&quot;</span><span class="p">,</span> <span class="mf">1500.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>
+                      <span class="s2">&quot;AUSTRALIA&quot;</span><span class="p">,</span> <span class="s2">&quot;+61 987 654 3210&quot;</span><span class="p">,</span> <span class="s2">&quot;789 12 6118&quot;</span>
+                     <span class="p">)</span>
+                <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span> \
+    <span class="n">createDataFrame</span><span class="p">(</span><span class="n">employees</span><span class="p">,</span>
+                    <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;employee_id INT, first_name STRING, </span>
+<span class="s2">                    last_name STRING, salary FLOAT, bonus STRING, nationality STRING,</span>
+<span class="s2">                    phone_number STRING, ssn STRING&quot;&quot;&quot;</span>
+                   <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10| united states| +1 123 456 7890|123 45 6789|
+|          2|     Henry|     Ford|1250.0| null|         India|+91 234 567 8901|456 78 9123|
+|          3|      Nick|   Junior| 750.0|     |united KINGDOM|+44 111 111 1111|222 33 4444|
+|          4|      Bill|    Gomes|1500.0|   10|     AUSTRALIA|+61 987 654 3210|789 12 6118|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Let us transform bonus to 0 in case of null or empty, otherwise return the bonus amount.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">coalesce</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">col</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;bonus1&#39;</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;bonus&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+--------------+----------------+-----------+------+
+|employee_id|first_name|last_name|salary|bonus|   nationality|    phone_number|        ssn|bonus1|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+------+
+|          1|     Scott|    Tiger|1000.0|   10| united states| +1 123 456 7890|123 45 6789|    10|
+|          2|     Henry|     Ford|1250.0| null|         India|+91 234 567 8901|456 78 9123|     0|
+|          3|      Nick|   Junior| 750.0|     |united KINGDOM|+44 111 111 1111|222 33 4444|     0|
+|          4|      Bill|    Gomes|1500.0|   10|     AUSTRALIA|+61 987 654 3210|789 12 6118|    10|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">expr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span>
+        <span class="s1">&#39;bonus&#39;</span><span class="p">,</span> 
+        <span class="n">expr</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            CASE WHEN bonus IS NULL OR bonus = &#39;&#39; THEN 0</span>
+<span class="s2">            ELSE bonus</span>
+<span class="s2">            END</span>
+<span class="s2">            &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10| united states| +1 123 456 7890|123 45 6789|
+|          2|     Henry|     Ford|1250.0|    0|         India|+91 234 567 8901|456 78 9123|
+|          3|      Nick|   Junior| 750.0|    0|united KINGDOM|+44 111 111 1111|222 33 4444|
+|          4|      Bill|    Gomes|1500.0|   10|     AUSTRALIA|+61 987 654 3210|789 12 6118|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">when</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>when<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">Signature:</span> when<span class=" -Color -Color-Blue">(</span>condition<span class=" -Color -Color-Blue">,</span> value<span class=" -Color -Color-Blue">)</span>
+<span class=" -Color -Color-Red">Docstring:</span>
+Evaluates a list of conditions and returns one of multiple possible result expressions.
+If :func:`Column.otherwise` is not invoked, None is returned for unmatched conditions.
+
+:param condition: a boolean :class:`Column` expression.
+:param value: a literal value, or a :class:`Column` expression.
+
+&gt;&gt;&gt; df.select(when(df[&#39;age&#39;] == 2, 3).otherwise(4).alias(&quot;age&quot;)).collect()
+[Row(age=3), Row(age=4)]
+
+&gt;&gt;&gt; df.select(when(df.age == 2, df.age + 1).alias(&quot;age&quot;)).collect()
+[Row(age=3), Row(age=None)]
+
+.. versionadded:: 1.4
+<span class=" -Color -Color-Red">File:</span>      /usr/hdp/current/spark2-client/python/pyspark/sql/functions.py
+<span class=" -Color -Color-Red">Type:</span>      function
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employeesDF</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span>
+        <span class="s1">&#39;bonus&#39;</span><span class="p">,</span>
+        <span class="n">when</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;bonus&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">())</span> <span class="o">|</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;bonus&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">lit</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;bonus&#39;</span><span class="p">))</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+----------+---------+------+-----+--------------+----------------+-----------+
+|employee_id|first_name|last_name|salary|bonus|   nationality|    phone_number|        ssn|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+
+|          1|     Scott|    Tiger|1000.0|   10| united states| +1 123 456 7890|123 45 6789|
+|          2|     Henry|     Ford|1250.0|    0|         India|+91 234 567 8901|456 78 9123|
+|          3|      Nick|   Junior| 750.0|    0|united KINGDOM|+44 111 111 1111|222 33 4444|
+|          4|      Bill|    Gomes|1500.0|   10|     AUSTRALIA|+61 987 654 3210|789 12 6118|
++-----------+----------+---------+------+-----+--------------+----------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Create a dataframe using list called as persons and categorize them based up on following rules.</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Age range</p></th>
+<th class="head"><p>Category</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0 to 2 Months</p></td>
+<td><p>New Born</p></td>
+</tr>
+<tr class="row-odd"><td><p>2+ Months to 12 Months</p></td>
+<td><p>Infant</p></td>
+</tr>
+<tr class="row-even"><td><p>12+ Months to 48 Months</p></td>
+<td><p>Toddler</p></td>
+</tr>
+<tr class="row-odd"><td><p>48+ Months to 144 Months</p></td>
+<td><p>Kids</p></td>
+</tr>
+<tr class="row-even"><td><p>144+ Months</p></td>
+<td><p>Teenager or Adult</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">persons</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personsDF</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">persons</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="s1">&#39;id INT, age INT&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personsDF</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---+---+
+| id|age|
++---+---+
+|  1|  1|
+|  2| 13|
+|  3| 18|
+|  4| 60|
+|  5|120|
+|  6|  0|
+|  7| 12|
+|  8|160|
++---+---+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personsDF</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">,</span>
+        <span class="n">expr</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            CASE</span>
+<span class="s2">            WHEN age BETWEEN 0 AND 2 THEN &#39;New Born&#39;</span>
+<span class="s2">            WHEN age &gt; 2 AND age &lt;= 12 THEN &#39;Infant&#39;</span>
+<span class="s2">            WHEN age &gt; 12 AND age &lt;= 48 THEN &#39;Toddler&#39;</span>
+<span class="s2">            WHEN age &gt; 48 AND age &lt;= 144 THEN &#39;Kid&#39;</span>
+<span class="s2">            ELSE &#39;Teenager or Adult&#39;</span>
+<span class="s2">            END</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---+---+-----------------+
+| id|age|         category|
++---+---+-----------------+
+|  1|  1|         New Born|
+|  2| 13|          Toddler|
+|  3| 18|          Toddler|
+|  4| 60|              Kid|
+|  5|120|              Kid|
+|  6|  0|         New Born|
+|  7| 12|           Infant|
+|  8|160|Teenager or Adult|
++---+---+-----------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personsDF</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">,</span>
+        <span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;New Born&#39;</span><span class="p">)</span><span class="o">.</span>
+        <span class="n">when</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;Infant&#39;</span><span class="p">)</span><span class="o">.</span>
+        <span class="n">when</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">48</span><span class="p">),</span> <span class="s1">&#39;Toddler&#39;</span><span class="p">)</span><span class="o">.</span>
+        <span class="n">when</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">48</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">144</span><span class="p">),</span> <span class="s1">&#39;Kid&#39;</span><span class="p">)</span><span class="o">.</span>
+        <span class="n">otherwise</span><span class="p">(</span><span class="s1">&#39;Teenager or Adult&#39;</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---+---+-----------------+
+| id|age|         category|
++---+---+-----------------+
+|  1|  1|         New Born|
+|  2| 13|          Toddler|
+|  3| 18|          Toddler|
+|  4| 60|              Kid|
+|  5|120|              Kid|
+|  6|  0|         New Born|
+|  7| 12|           Infant|
+|  8|160|Teenager or Adult|
++---+---+-----------------+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./04_processing_column_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="18_dealing_with_nulls.html" title="previous page">Dealing with Nulls</a>
+    <a class='right-next' id="next-link" href="20_conclusion_predefined_functions.html" title="next page">Conclusion</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

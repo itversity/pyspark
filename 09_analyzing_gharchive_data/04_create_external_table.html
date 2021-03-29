@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>&lt;no title&gt; &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/09_analyzing_gharchive_data/04_create_external_table.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F09_analyzing_gharchive_data/04_create_external_table.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/09_analyzing_gharchive_data/04_create_external_table.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/09_analyzing_gharchive_data/04_create_external_table.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="simple nav section-nav flex-column">
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Analyze GitHub Archive Data&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;spark.sql.shuffle.partitions&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">process_dt</span> <span class="o">=</span> <span class="s1">&#39;2021-01-13&#39;</span>
+<span class="n">ghdata</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span> \
+    <span class="n">read</span><span class="o">.</span> \
+    <span class="n">json</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/itv-github/landing/</span><span class="si">{</span><span class="n">process_dt</span><span class="si">}</span><span class="s1">-*.json.gz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">substring</span><span class="p">,</span> <span class="n">col</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CREATE DATABASE IF NOT EXISTS </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame[]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DROP TABLE IF EXISTS </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.ghactivity&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame[]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -ls /user/${USER}/warehouse/${USER}_raw.db
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -rm -R -skipTrash /user/${USER}/warehouse/${USER}_raw.db/ghactivity
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rm: `/user/itversity/warehouse/itversity_raw.db/ghactivity&#39;: No such file or directory
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">CalledProcessError</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">76</span><span class="o">-</span><span class="mi">65</span><span class="n">ee334f1d2f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">hdfs dfs -rm -R -skipTrash /user/$</span><span class="si">{USER}</span><span class="s1">/warehouse/$</span><span class="si">{USER}</span><span class="s1">_raw.db/ghactivity</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.6/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2360</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2361</span>                 <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2362</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2363</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2364</span> 
+
+<span class="nn">/usr/local/lib/python3.6/site-packages/IPython/core/magics/script.py</span> in <span class="ni">named_script_magic</span><span class="nt">(line, cell)</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span>             <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>                 <span class="n">line</span> <span class="o">=</span> <span class="n">script</span>
+<span class="ne">--&gt; </span><span class="mi">142</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shebang</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span> 
+<span class="g g-Whitespace">    </span><span class="mi">144</span>         <span class="c1"># write a basic docstring:</span>
+
+<span class="nn">&lt;decorator-gen-110&gt;</span> in <span class="ni">shebang</span><span class="nt">(self, line, cell)</span>
+
+<span class="nn">/usr/local/lib/python3.6/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="k">def</span> <span class="nf">magic_deco</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">187</span>         <span class="n">call</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> 
+<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+
+<span class="nn">/usr/local/lib/python3.6/site-packages/IPython/core/magics/script.py</span> in <span class="ni">shebang</span><span class="nt">(self, line, cell)</span>
+<span class="g g-Whitespace">    </span><span class="mi">243</span>             <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">244</span>         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">raise_error</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">returncode</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">245</span>             <span class="k">raise</span> <span class="n">CalledProcessError</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">returncode</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">err</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span> 
+<span class="g g-Whitespace">    </span><span class="mi">247</span>     <span class="k">def</span> <span class="nf">_run_script</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">to_close</span><span class="p">):</span>
+
+<span class="ne">CalledProcessError</span>: Command &#39;b&#39;\nhdfs dfs -rm -R -skipTrash /user/${USER}/warehouse/${USER}_raw.db/ghactivity\n&#39;&#39; returned non-zero exit status 1.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ghdata</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------------------+--------------------+-----------+--------------------+--------------------+------+--------------------+-----------------+----+-----+---+
+|               actor|          created_at|         id|                 org|             payload|public|                repo|             type|year|month|day|
++--------------------+--------------------+-----------+--------------------+--------------------+------+--------------------+-----------------+----+-----+---+
+|[https://avatars....|2021-01-13T15:00:00Z|14806766244|                null|[opened,,,,,,,,,,...|  true|[328163487, heret...| PullRequestEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766250|[https://avatars....|[created,, [, COL...|  true|[155705622, conta...|IssueCommentEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766257|                null|[,,,, A robot pow...|  true|[329342078, gmone...|      CreateEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766262|[https://avatars....|[, bce214068f9be7...|  true|[264190944, Lombi...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766264|                null|[, c6f394b3e563a9...|  true|[299870114, brann...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766268|[https://avatars....|[, 4c22d1ba369479...|  true|[106238080, osmoc...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766275|                null|[, a49d46292b4c90...|  true|[194426708, JCGit...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766279|                null|[, a85473122de60c...|  true|[199937517, chris...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766283|                null|[, e4b0af42300a00...|  true|[328015832, Oscar...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766284|                null|[, 94db045b78b848...|  true|[321776554, mismy...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766289|                null|[, 4375ed98ffd9de...|  true|[178015037, eLaLa...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766293|[https://avatars....|[, 58e4eaf5b2f907...|  true|[319660904, sut63...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766306|                null|[closed,,,,,,,,,,...|  true|[295936975, r4b3r...| PullRequestEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766316|                null|[, 809de505b9b50b...|  true|[326438841, rjpag...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766329|                null|[, 1f052d209dba90...|  true|[33147620, fappel...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766342|                null|[,,,,,, [https://...|  true|[7099642, thinkde...|        ForkEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766343|[https://avatars....|[created,, [, NON...|  true|[296376379, x-sta...|IssueCommentEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766346|                null|[,,,,,,,,,,,,,,, ...|  true|[323028365, shenb...|      DeleteEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766351|                null|[, 17d66078f8ac4c...|  true|[328085834, rhean...|        PushEvent|2021|   01| 13|
+|[https://avatars....|2021-01-13T15:00:00Z|14806766353|                null|[started,,,,,,,,,...|  true|[106096128, bbong...|       WatchEvent|2021|   01| 13|
++--------------------+--------------------+-----------+--------------------+--------------------+------+--------------------+-----------------+----+-----+---+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ghdata</span> <span class="o">=</span> <span class="n">ghdata</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ghdata</span><span class="o">.</span> \
+    <span class="n">write</span><span class="o">.</span> \
+    <span class="n">partitionBy</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">saveAsTable</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.ghactivity&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SHOW PARTITIONS </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.ghactivity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------------------------+
+|partition                |
++-------------------------+
+|year=2021/month=01/day=13|
++-------------------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -ls -R /user/${USER}/warehouse/${USER}_raw.db/ghactivity
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-rw-r--r--   2 itversity students          0 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/_SUCCESS
+drwxr-xr-x   - itversity students          0 2021-01-24 09:47 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021
+drwxr-xr-x   - itversity students          0 2021-01-24 09:47 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01
+drwxr-xr-x   - itversity students          0 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13
+-rw-r--r--   2 itversity students  159325117 2021-01-24 09:47 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00000-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  165619120 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00001-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  152417041 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00002-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  152311906 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00003-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  143133044 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00004-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  133085267 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00005-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  137530962 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00006-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  132299149 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00007-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  128228178 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00008-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  125592757 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00009-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  121661155 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00010-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  118533742 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00011-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  119934139 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00012-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  231054055 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00013-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  211329912 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00014-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  185399078 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00015-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  165457961 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00016-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  156983174 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00017-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students   73883291 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00018-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    SELECT substring(created_at, 1, 10) AS created_dt, count(1)</span>
+<span class="s1">    FROM </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.ghactivity</span>
+<span class="s1">    GROUP BY created_dt</span>
+<span class="s1">    ORDER BY created_dt</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+--------+
+|created_dt|count(1)|
++----------+--------+
+|2021-01-13| 2829111|
++----------+--------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">substring</span><span class="p">,</span> <span class="n">col</span>
+<span class="n">process_dt</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter date to copy the data (yyyy-MM-dd): &#39;</span><span class="p">)</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;spark.sql.shuffle.partitions&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">ghdata</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span> \
+    <span class="n">read</span><span class="o">.</span> \
+    <span class="n">json</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/itv-github/landing/</span><span class="si">{</span><span class="n">process_dt</span><span class="si">}</span><span class="s1">-*.json.gz&#39;</span><span class="p">)</span>
+<span class="n">ghdata</span> <span class="o">=</span> <span class="n">ghdata</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">ghdata</span><span class="o">.</span> \
+    <span class="n">write</span><span class="o">.</span> \
+    <span class="n">mode</span><span class="p">(</span><span class="s1">&#39;append&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">partitionBy</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/warehouse/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.db/ghactivity&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter date to copy the data (yyyy-MM-dd):  2021-01-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SHOW PARTITIONS </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.ghactivity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------------------------+
+|partition                |
++-------------------------+
+|year=2021/month=01/day=13|
+|year=2021/month=01/day=14|
++-------------------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -ls -R /user/${USER}/warehouse/${USER}_raw.db/ghactivity
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-rw-r--r--   2 itversity students          0 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/_SUCCESS
+drwxr-xr-x   - itversity students          0 2021-01-24 09:47 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021
+drwxr-xr-x   - itversity students          0 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01
+drwxr-xr-x   - itversity students          0 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13
+-rw-r--r--   2 itversity students  159325117 2021-01-24 09:47 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00000-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  165619120 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00001-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  152417041 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00002-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  152311906 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00003-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  143133044 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00004-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  133085267 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00005-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  137530962 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00006-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  132299149 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00007-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  128228178 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00008-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  125592757 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00009-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  121661155 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00010-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  118533742 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00011-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  119934139 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00012-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  231054055 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00013-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  211329912 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00014-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  185399078 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00015-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  165457961 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00016-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students  156983174 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00017-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+-rw-r--r--   2 itversity students   73883291 2021-01-24 09:48 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=13/part-00018-b10eafc3-d753-4237-b5dd-eaafc9a0019d.c000.snappy.parquet
+drwxr-xr-x   - itversity students          0 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14
+-rw-r--r--   2 itversity students  216028660 2021-01-24 09:53 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00000-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  154193376 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00001-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  149349344 2021-01-24 09:53 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00002-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  149772936 2021-01-24 09:53 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00003-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  147998750 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00004-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  139805873 2021-01-24 09:53 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00005-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  131689517 2021-01-24 09:53 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00006-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  126635826 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00007-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  128132112 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00008-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  123956029 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00009-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  120364647 2021-01-24 09:53 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00010-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  108340480 2021-01-24 09:53 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00011-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  237315412 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00012-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  226406816 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00013-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  207705743 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00014-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  188466384 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00015-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  162405069 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00016-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+-rw-r--r--   2 itversity students  150296766 2021-01-24 09:54 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=14/part-00017-ca90ecf9-2724-407b-9dd0-0daa752a2ab4.c000.snappy.parquet
+drwxr-xr-x   - itversity students          0 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15
+-rw-r--r--   2 itversity students  135591247 2021-01-24 09:56 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00000-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  134257569 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00001-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  132610456 2021-01-24 09:56 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00002-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  129901694 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00003-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  127174735 2021-01-24 09:56 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00004-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  119869579 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00005-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  120704919 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00006-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  118155536 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00007-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  222774807 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00008-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  230409356 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00009-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  224791311 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00010-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  211472611 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00011-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  192290392 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00012-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  178400302 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00013-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  159110416 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00014-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+-rw-r--r--   2 itversity students  146946086 2021-01-24 09:57 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=15/part-00015-909bdb62-4d8b-4916-8643-525e52498b07.c000.snappy.parquet
+drwxr-xr-x   - itversity students          0 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16
+-rw-r--r--   2 itversity students  151878309 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00000-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  149896818 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00001-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  146883477 2021-01-24 09:58 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00002-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  140696716 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00003-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  131720117 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00004-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  125963756 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00005-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  119574789 2021-01-24 09:59 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00006-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  115806882 2021-01-24 09:58 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00007-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  108268300 2021-01-24 09:58 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00008-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  105313732 2021-01-24 09:58 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00009-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students  142306269 2021-01-24 09:58 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00010-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+-rw-r--r--   2 itversity students   45038462 2021-01-24 09:58 /user/itversity/warehouse/itversity_raw.db/ghactivity/year=2021/month=01/day=16/part-00011-6654896a-500f-4776-867f-91c39abe1e79.c000.snappy.parquet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    MSCK REPAIR TABLE </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.ghactivity</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame[]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SHOW PARTITIONS </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.ghactivity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------------------------+
+|partition                |
++-------------------------+
+|year=2021/month=01/day=13|
+|year=2021/month=01/day=14|
+|year=2021/month=01/day=15|
+|year=2021/month=01/day=16|
++-------------------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    SELECT substring(created_at, 1, 10) AS created_dt, count(1)</span>
+<span class="s1">    FROM </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_raw.ghactivity</span>
+<span class="s1">    GROUP BY created_dt</span>
+<span class="s1">    ORDER BY created_dt</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+--------+
+|created_dt|count(1)|
++----------+--------+
+|2021-01-13| 2829111|
+|2021-01-14| 2857818|
+|2021-01-15| 2652900|
+|2021-01-16| 1964511|
++----------+--------+
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./09_analyzing_gharchive_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

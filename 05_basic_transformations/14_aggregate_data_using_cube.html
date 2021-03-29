@@ -1,0 +1,1248 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aggregate data using cube &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Overview of Sorting Data Frames" href="15_overview_of_sorting_data_frames.html" />
+    <link rel="prev" title="Aggregate data using rollup" href="13_aggregate_data_using_rollup.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_basic_transformations.html">
+   Basic Transformations
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_overview_of_basic_transformations.html">
+     Overview of Basic Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_data_frame_for_basic_transformations.html">
+     Data Frame for basic transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_basic_filtering_of_data.html">
+     Basic Filtering of Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_filtering_example_using_dates.html">
+     Filtering example using dates
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_boolean_operators.html">
+     Boolean Operators
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_using_in_operator_or_isin_function.html">
+     Using IN Operator or isin Function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08_using_like_operator_or_function.html">
+     Using LIKE Operator or like Function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_using_between_operator.html">
+     Using BETWEEN Operator
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_dealing_with_nulls_while_filtering.html">
+     Dealing with Nulls while Filtering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11_total_aggregations.html">
+     Total Aggregations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12_aggregate_data_using_groupby.html">
+     Aggregate data using groupBy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="13_aggregate_data_using_rollup.html">
+     Aggregate data using rollup
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Aggregate data using cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="15_overview_of_sorting_data_frames.html">
+     Overview of Sorting Data Frames
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="16_solution_problem_1.html">
+     Solutions - Problem 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="17_solution_problem_2.html">
+     Solutions - Problem 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="18_solution_problem_3.html">
+     Solutions - Problem 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/05_basic_transformations/14_aggregate_data_using_cube.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F05_basic_transformations/14_aggregate_data_using_cube.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/05_basic_transformations/14_aggregate_data_using_cube.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/05_basic_transformations/14_aggregate_data_using_cube.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="aggregate-data-using-cube">
+<h1>Aggregate data using cube<a class="headerlink" href="#aggregate-data-using-cube" title="Permalink to this headline">¶</a></h1>
+<p>Let us go through the details related to advanced aggregations using <code class="docutils literal notranslate"><span class="pre">cube</span></code> in Spark.</p>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Basic Transformations&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="s1">&#39;/public/retail_db_json/orders&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------------+--------------------+--------+---------------+
+|order_customer_id|          order_date|order_id|   order_status|
++-----------------+--------------------+--------+---------------+
+|            11599|2013-07-25 00:00:...|       1|         CLOSED|
+|              256|2013-07-25 00:00:...|       2|PENDING_PAYMENT|
+|            12111|2013-07-25 00:00:...|       3|       COMPLETE|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|
+|             7130|2013-07-25 00:00:...|       6|       COMPLETE|
+|             4530|2013-07-25 00:00:...|       7|       COMPLETE|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|
+|             5657|2013-07-25 00:00:...|       9|PENDING_PAYMENT|
+|             5648|2013-07-25 00:00:...|      10|PENDING_PAYMENT|
+|              918|2013-07-25 00:00:...|      11| PAYMENT_REVIEW|
+|             1837|2013-07-25 00:00:...|      12|         CLOSED|
+|             9149|2013-07-25 00:00:...|      13|PENDING_PAYMENT|
+|             9842|2013-07-25 00:00:...|      14|     PROCESSING|
+|             2568|2013-07-25 00:00:...|      15|       COMPLETE|
+|             7276|2013-07-25 00:00:...|      16|PENDING_PAYMENT|
+|             2667|2013-07-25 00:00:...|      17|       COMPLETE|
+|             1205|2013-07-25 00:00:...|      18|         CLOSED|
+|             9488|2013-07-25 00:00:...|      19|PENDING_PAYMENT|
+|             9198|2013-07-25 00:00:...|      20|     PROCESSING|
++-----------------+--------------------+--------+---------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root
+ |-- order_customer_id: long (nullable = true)
+ |-- order_date: string (nullable = true)
+ |-- order_id: long (nullable = true)
+ |-- order_status: string (nullable = true)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68883
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Get count of orders by date using cube.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">count</span><span class="p">,</span> <span class="n">lit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------------------+-----------+
+|          order_date|order_count|
++--------------------+-----------+
+|2013-08-13 00:00:...|         73|
+|2013-10-12 00:00:...|        162|
+|2013-11-15 00:00:...|        135|
+|2014-03-19 00:00:...|        130|
+|2014-04-26 00:00:...|        251|
+|2013-09-16 00:00:...|        121|
+|2013-09-20 00:00:...|        139|
+|2013-12-31 00:00:...|        266|
+|2013-09-06 00:00:...|        276|
+|2014-06-15 00:00:...|        128|
+|2013-12-24 00:00:...|        170|
+|2014-01-07 00:00:...|        163|
+|2014-06-07 00:00:...|        191|
+|2013-10-14 00:00:...|        139|
+|2013-11-11 00:00:...|        246|
+|2014-01-27 00:00:...|        163|
+|2014-01-29 00:00:...|        158|
+|2014-02-14 00:00:...|        174|
+|2014-04-15 00:00:...|        180|
+|2014-04-22 00:00:...|        144|
++--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>364
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>orders.cube<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">Signature:</span> orders<span class=" -Color -Color-Blue">.</span>cube<span class=" -Color -Color-Blue">(*</span>cols<span class=" -Color -Color-Blue">)</span>
+<span class=" -Color -Color-Red">Docstring:</span>
+Create a multi-dimensional cube for the current :class:`DataFrame` using
+the specified columns, so we can run aggregation on them.
+
+&gt;&gt;&gt; df.cube(&quot;name&quot;, df.age).count().orderBy(&quot;name&quot;, &quot;age&quot;).show()
++-----+----+-----+
+| name| age|count|
++-----+----+-----+
+| null|null|    2|
+| null|   2|    1|
+| null|   5|    1|
+|Alice|null|    1|
+|Alice|   2|    1|
+|  Bob|null|    1|
+|  Bob|   5|    1|
++-----+----+-----+
+
+.. versionadded:: 1.4
+<span class=" -Color -Color-Red">File:</span>      /usr/hdp/current/spark2-client/python/pyspark/sql/dataframe.py
+<span class=" -Color -Color-Red">Type:</span>      method
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------------------+-----------+
+|          order_date|order_count|
++--------------------+-----------+
+|                null|      68883|
+|2013-07-25 00:00:...|        143|
+|2013-07-26 00:00:...|        269|
+|2013-07-27 00:00:...|        202|
+|2013-07-28 00:00:...|        187|
+|2013-07-29 00:00:...|        253|
+|2013-07-30 00:00:...|        227|
+|2013-07-31 00:00:...|        252|
+|2013-08-01 00:00:...|        246|
+|2013-08-02 00:00:...|        224|
+|2013-08-03 00:00:...|        183|
+|2013-08-04 00:00:...|        187|
+|2013-08-05 00:00:...|        153|
+|2013-08-06 00:00:...|        258|
+|2013-08-07 00:00:...|        203|
+|2013-08-08 00:00:...|        154|
+|2013-08-09 00:00:...|        125|
+|2013-08-10 00:00:...|        270|
+|2013-08-11 00:00:...|        154|
+|2013-08-12 00:00:...|        255|
++--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>365
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Get count of orders by month as well as date using cube. You will see additional records per month.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">date_format</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span><span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+--------------------+-----------+
+|order_month|          order_date|order_count|
++-----------+--------------------+-----------+
+|     201307|2013-07-25 00:00:...|        143|
+|     201307|2013-07-26 00:00:...|        269|
+|     201307|2013-07-27 00:00:...|        202|
+|     201307|2013-07-28 00:00:...|        187|
+|     201307|2013-07-29 00:00:...|        253|
+|     201307|2013-07-30 00:00:...|        227|
+|     201307|2013-07-31 00:00:...|        252|
+|     201308|2013-08-01 00:00:...|        246|
+|     201308|2013-08-02 00:00:...|        224|
+|     201308|2013-08-03 00:00:...|        183|
+|     201308|2013-08-04 00:00:...|        187|
+|     201308|2013-08-05 00:00:...|        153|
+|     201308|2013-08-06 00:00:...|        258|
+|     201308|2013-08-07 00:00:...|        203|
+|     201308|2013-08-08 00:00:...|        154|
+|     201308|2013-08-09 00:00:...|        125|
+|     201308|2013-08-10 00:00:...|        270|
+|     201308|2013-08-11 00:00:...|        154|
+|     201308|2013-08-12 00:00:...|        255|
+|     201308|2013-08-13 00:00:...|         73|
++-----------+--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span><span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>364
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">rollup</span><span class="p">(</span><span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+--------------------+-----------+
+|order_month|          order_date|order_count|
++-----------+--------------------+-----------+
+|       null|                null|      68883|
+|     201307|                null|       1533|
+|     201307|2013-07-25 00:00:...|        143|
+|     201307|2013-07-26 00:00:...|        269|
+|     201307|2013-07-27 00:00:...|        202|
+|     201307|2013-07-28 00:00:...|        187|
+|     201307|2013-07-29 00:00:...|        253|
+|     201307|2013-07-30 00:00:...|        227|
+|     201307|2013-07-31 00:00:...|        252|
+|     201308|                null|       5680|
+|     201308|2013-08-01 00:00:...|        246|
+|     201308|2013-08-02 00:00:...|        224|
+|     201308|2013-08-03 00:00:...|        183|
+|     201308|2013-08-04 00:00:...|        187|
+|     201308|2013-08-05 00:00:...|        153|
+|     201308|2013-08-06 00:00:...|        258|
+|     201308|2013-08-07 00:00:...|        203|
+|     201308|2013-08-08 00:00:...|        154|
+|     201308|2013-08-09 00:00:...|        125|
+|     201308|2013-08-10 00:00:...|        270|
++-----------+--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">rollup</span><span class="p">(</span><span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>378
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span><span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+--------------------+-----------+
+|order_month|          order_date|order_count|
++-----------+--------------------+-----------+
+|       null|                null|      68883|
+|       null|2013-07-25 00:00:...|        143|
+|       null|2013-07-26 00:00:...|        269|
+|       null|2013-07-27 00:00:...|        202|
+|       null|2013-07-28 00:00:...|        187|
+|       null|2013-07-29 00:00:...|        253|
+|       null|2013-07-30 00:00:...|        227|
+|       null|2013-07-31 00:00:...|        252|
+|       null|2013-08-01 00:00:...|        246|
+|       null|2013-08-02 00:00:...|        224|
+|       null|2013-08-03 00:00:...|        183|
+|       null|2013-08-04 00:00:...|        187|
+|       null|2013-08-05 00:00:...|        153|
+|       null|2013-08-06 00:00:...|        258|
+|       null|2013-08-07 00:00:...|        203|
+|       null|2013-08-08 00:00:...|        154|
+|       null|2013-08-09 00:00:...|        125|
+|       null|2013-08-10 00:00:...|        270|
+|       null|2013-08-11 00:00:...|        154|
+|       null|2013-08-12 00:00:...|        255|
++-----------+--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span><span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="s1">&#39;order_month IS NOT NULL&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+--------------------+-----------+
+|order_month|          order_date|order_count|
++-----------+--------------------+-----------+
+|     201307|                null|       1533|
+|     201307|2013-07-25 00:00:...|        143|
+|     201307|2013-07-26 00:00:...|        269|
+|     201307|2013-07-27 00:00:...|        202|
+|     201307|2013-07-28 00:00:...|        187|
+|     201307|2013-07-29 00:00:...|        253|
+|     201307|2013-07-30 00:00:...|        227|
+|     201307|2013-07-31 00:00:...|        252|
+|     201308|                null|       5680|
+|     201308|2013-08-01 00:00:...|        246|
+|     201308|2013-08-02 00:00:...|        224|
+|     201308|2013-08-03 00:00:...|        183|
+|     201308|2013-08-04 00:00:...|        187|
+|     201308|2013-08-05 00:00:...|        153|
+|     201308|2013-08-06 00:00:...|        258|
+|     201308|2013-08-07 00:00:...|        203|
+|     201308|2013-08-08 00:00:...|        154|
+|     201308|2013-08-09 00:00:...|        125|
+|     201308|2013-08-10 00:00:...|        270|
+|     201308|2013-08-11 00:00:...|        154|
++-----------+--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span><span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>742
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Get count of orders by year, month as well as date using cube. You will see additional records per month as well as per year.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">year</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span>
+        <span class="n">year</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">),</span>
+        <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> 
+        <span class="s1">&#39;order_date&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">,</span> <span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+-----------+--------------------+-----------+
+|order_year|order_month|          order_date|order_count|
++----------+-----------+--------------------+-----------+
+|      2013|     201307|2013-07-25 00:00:...|        143|
+|      2013|     201307|2013-07-26 00:00:...|        269|
+|      2013|     201307|2013-07-27 00:00:...|        202|
+|      2013|     201307|2013-07-28 00:00:...|        187|
+|      2013|     201307|2013-07-29 00:00:...|        253|
+|      2013|     201307|2013-07-30 00:00:...|        227|
+|      2013|     201307|2013-07-31 00:00:...|        252|
+|      2013|     201308|2013-08-01 00:00:...|        246|
+|      2013|     201308|2013-08-02 00:00:...|        224|
+|      2013|     201308|2013-08-03 00:00:...|        183|
+|      2013|     201308|2013-08-04 00:00:...|        187|
+|      2013|     201308|2013-08-05 00:00:...|        153|
+|      2013|     201308|2013-08-06 00:00:...|        258|
+|      2013|     201308|2013-08-07 00:00:...|        203|
+|      2013|     201308|2013-08-08 00:00:...|        154|
+|      2013|     201308|2013-08-09 00:00:...|        125|
+|      2013|     201308|2013-08-10 00:00:...|        270|
+|      2013|     201308|2013-08-11 00:00:...|        154|
+|      2013|     201308|2013-08-12 00:00:...|        255|
+|      2013|     201308|2013-08-13 00:00:...|         73|
++----------+-----------+--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span>
+        <span class="n">year</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">),</span>
+        <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> 
+        <span class="s1">&#39;order_date&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">,</span> <span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>364
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">rollup</span><span class="p">(</span>
+        <span class="n">year</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">),</span>
+        <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> 
+        <span class="s1">&#39;order_date&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">,</span> <span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+-----------+--------------------+-----------+
+|order_year|order_month|          order_date|order_count|
++----------+-----------+--------------------+-----------+
+|      null|       null|                null|      68883|
+|      2013|       null|                null|      30662|
+|      2013|     201307|                null|       1533|
+|      2013|     201307|2013-07-25 00:00:...|        143|
+|      2013|     201307|2013-07-26 00:00:...|        269|
+|      2013|     201307|2013-07-27 00:00:...|        202|
+|      2013|     201307|2013-07-28 00:00:...|        187|
+|      2013|     201307|2013-07-29 00:00:...|        253|
+|      2013|     201307|2013-07-30 00:00:...|        227|
+|      2013|     201307|2013-07-31 00:00:...|        252|
+|      2013|     201308|                null|       5680|
+|      2013|     201308|2013-08-01 00:00:...|        246|
+|      2013|     201308|2013-08-02 00:00:...|        224|
+|      2013|     201308|2013-08-03 00:00:...|        183|
+|      2013|     201308|2013-08-04 00:00:...|        187|
+|      2013|     201308|2013-08-05 00:00:...|        153|
+|      2013|     201308|2013-08-06 00:00:...|        258|
+|      2013|     201308|2013-08-07 00:00:...|        203|
+|      2013|     201308|2013-08-08 00:00:...|        154|
+|      2013|     201308|2013-08-09 00:00:...|        125|
++----------+-----------+--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">rollup</span><span class="p">(</span>
+        <span class="n">year</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">),</span>
+        <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> 
+        <span class="s1">&#39;order_date&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">,</span> <span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>380
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span>
+        <span class="n">year</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">),</span>
+        <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> 
+        <span class="s1">&#39;order_date&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">,</span> <span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+-----------+--------------------+-----------+
+|order_year|order_month|          order_date|order_count|
++----------+-----------+--------------------+-----------+
+|      null|       null|                null|      68883|
+|      null|       null|2013-07-25 00:00:...|        143|
+|      null|       null|2013-07-26 00:00:...|        269|
+|      null|       null|2013-07-27 00:00:...|        202|
+|      null|       null|2013-07-28 00:00:...|        187|
+|      null|       null|2013-07-29 00:00:...|        253|
+|      null|       null|2013-07-30 00:00:...|        227|
+|      null|       null|2013-07-31 00:00:...|        252|
+|      null|       null|2013-08-01 00:00:...|        246|
+|      null|       null|2013-08-02 00:00:...|        224|
+|      null|       null|2013-08-03 00:00:...|        183|
+|      null|       null|2013-08-04 00:00:...|        187|
+|      null|       null|2013-08-05 00:00:...|        153|
+|      null|       null|2013-08-06 00:00:...|        258|
+|      null|       null|2013-08-07 00:00:...|        203|
+|      null|       null|2013-08-08 00:00:...|        154|
+|      null|       null|2013-08-09 00:00:...|        125|
+|      null|       null|2013-08-10 00:00:...|        270|
+|      null|       null|2013-08-11 00:00:...|        154|
+|      null|       null|2013-08-12 00:00:...|        255|
++----------+-----------+--------------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span>
+        <span class="n">year</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">),</span>
+        <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> 
+        <span class="s1">&#39;order_date&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">,</span> <span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1485
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span>
+        <span class="n">year</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">),</span>
+        <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> 
+        <span class="s1">&#39;order_date&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;order_date LIKE &#39;2014-01%&#39;&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">,</span> <span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------+-----------+--------------------+-----------+
+|order_year|order_month|          order_date|order_count|
++----------+-----------+--------------------+-----------+
+|      null|       null|2014-01-01 00:00:...|        135|
+|      null|       null|2014-01-02 00:00:...|        111|
+|      null|       null|2014-01-03 00:00:...|        250|
+|      null|       null|2014-01-04 00:00:...|        129|
+|      null|       null|2014-01-05 00:00:...|        266|
+|      null|       null|2014-01-06 00:00:...|        155|
+|      null|       null|2014-01-07 00:00:...|        163|
+|      null|       null|2014-01-08 00:00:...|        122|
+|      null|       null|2014-01-09 00:00:...|        207|
+|      null|       null|2014-01-10 00:00:...|        241|
+|      null|       null|2014-01-11 00:00:...|        281|
+|      null|       null|2014-01-12 00:00:...|        215|
+|      null|       null|2014-01-13 00:00:...|        179|
+|      null|       null|2014-01-14 00:00:...|        209|
+|      null|       null|2014-01-15 00:00:...|        243|
+|      null|       null|2014-01-16 00:00:...|        194|
+|      null|       null|2014-01-17 00:00:...|        149|
+|      null|       null|2014-01-18 00:00:...|        139|
+|      null|       null|2014-01-19 00:00:...|        217|
+|      null|       null|2014-01-20 00:00:...|        203|
+|      null|       null|2014-01-21 00:00:...|        259|
+|      null|       null|2014-01-22 00:00:...|        209|
+|      null|       null|2014-01-23 00:00:...|        220|
+|      null|       null|2014-01-24 00:00:...|        159|
+|      null|       null|2014-01-25 00:00:...|        104|
+|      null|       null|2014-01-26 00:00:...|        154|
+|      null|       null|2014-01-27 00:00:...|        163|
+|      null|       null|2014-01-28 00:00:...|        197|
+|      null|       null|2014-01-29 00:00:...|        158|
+|      null|       null|2014-01-30 00:00:...|        254|
+|      null|       null|2014-01-31 00:00:...|        223|
+|      null|     201401|2014-01-01 00:00:...|        135|
+|      null|     201401|2014-01-02 00:00:...|        111|
+|      null|     201401|2014-01-03 00:00:...|        250|
+|      null|     201401|2014-01-04 00:00:...|        129|
+|      null|     201401|2014-01-05 00:00:...|        266|
+|      null|     201401|2014-01-06 00:00:...|        155|
+|      null|     201401|2014-01-07 00:00:...|        163|
+|      null|     201401|2014-01-08 00:00:...|        122|
+|      null|     201401|2014-01-09 00:00:...|        207|
+|      null|     201401|2014-01-10 00:00:...|        241|
+|      null|     201401|2014-01-11 00:00:...|        281|
+|      null|     201401|2014-01-12 00:00:...|        215|
+|      null|     201401|2014-01-13 00:00:...|        179|
+|      null|     201401|2014-01-14 00:00:...|        209|
+|      null|     201401|2014-01-15 00:00:...|        243|
+|      null|     201401|2014-01-16 00:00:...|        194|
+|      null|     201401|2014-01-17 00:00:...|        149|
+|      null|     201401|2014-01-18 00:00:...|        139|
+|      null|     201401|2014-01-19 00:00:...|        217|
+|      null|     201401|2014-01-20 00:00:...|        203|
+|      null|     201401|2014-01-21 00:00:...|        259|
+|      null|     201401|2014-01-22 00:00:...|        209|
+|      null|     201401|2014-01-23 00:00:...|        220|
+|      null|     201401|2014-01-24 00:00:...|        159|
+|      null|     201401|2014-01-25 00:00:...|        104|
+|      null|     201401|2014-01-26 00:00:...|        154|
+|      null|     201401|2014-01-27 00:00:...|        163|
+|      null|     201401|2014-01-28 00:00:...|        197|
+|      null|     201401|2014-01-29 00:00:...|        158|
+|      null|     201401|2014-01-30 00:00:...|        254|
+|      null|     201401|2014-01-31 00:00:...|        223|
+|      2014|       null|2014-01-01 00:00:...|        135|
+|      2014|       null|2014-01-02 00:00:...|        111|
+|      2014|       null|2014-01-03 00:00:...|        250|
+|      2014|       null|2014-01-04 00:00:...|        129|
+|      2014|       null|2014-01-05 00:00:...|        266|
+|      2014|       null|2014-01-06 00:00:...|        155|
+|      2014|       null|2014-01-07 00:00:...|        163|
+|      2014|       null|2014-01-08 00:00:...|        122|
+|      2014|       null|2014-01-09 00:00:...|        207|
+|      2014|       null|2014-01-10 00:00:...|        241|
+|      2014|       null|2014-01-11 00:00:...|        281|
+|      2014|       null|2014-01-12 00:00:...|        215|
+|      2014|       null|2014-01-13 00:00:...|        179|
+|      2014|       null|2014-01-14 00:00:...|        209|
+|      2014|       null|2014-01-15 00:00:...|        243|
+|      2014|       null|2014-01-16 00:00:...|        194|
+|      2014|       null|2014-01-17 00:00:...|        149|
+|      2014|       null|2014-01-18 00:00:...|        139|
+|      2014|       null|2014-01-19 00:00:...|        217|
+|      2014|       null|2014-01-20 00:00:...|        203|
+|      2014|       null|2014-01-21 00:00:...|        259|
+|      2014|       null|2014-01-22 00:00:...|        209|
+|      2014|       null|2014-01-23 00:00:...|        220|
+|      2014|       null|2014-01-24 00:00:...|        159|
+|      2014|       null|2014-01-25 00:00:...|        104|
+|      2014|       null|2014-01-26 00:00:...|        154|
+|      2014|       null|2014-01-27 00:00:...|        163|
+|      2014|       null|2014-01-28 00:00:...|        197|
+|      2014|       null|2014-01-29 00:00:...|        158|
+|      2014|       null|2014-01-30 00:00:...|        254|
+|      2014|       null|2014-01-31 00:00:...|        223|
+|      2014|     201401|2014-01-01 00:00:...|        135|
+|      2014|     201401|2014-01-02 00:00:...|        111|
+|      2014|     201401|2014-01-03 00:00:...|        250|
+|      2014|     201401|2014-01-04 00:00:...|        129|
+|      2014|     201401|2014-01-05 00:00:...|        266|
+|      2014|     201401|2014-01-06 00:00:...|        155|
+|      2014|     201401|2014-01-07 00:00:...|        163|
+|      2014|     201401|2014-01-08 00:00:...|        122|
+|      2014|     201401|2014-01-09 00:00:...|        207|
+|      2014|     201401|2014-01-10 00:00:...|        241|
+|      2014|     201401|2014-01-11 00:00:...|        281|
+|      2014|     201401|2014-01-12 00:00:...|        215|
+|      2014|     201401|2014-01-13 00:00:...|        179|
+|      2014|     201401|2014-01-14 00:00:...|        209|
+|      2014|     201401|2014-01-15 00:00:...|        243|
+|      2014|     201401|2014-01-16 00:00:...|        194|
+|      2014|     201401|2014-01-17 00:00:...|        149|
+|      2014|     201401|2014-01-18 00:00:...|        139|
+|      2014|     201401|2014-01-19 00:00:...|        217|
+|      2014|     201401|2014-01-20 00:00:...|        203|
+|      2014|     201401|2014-01-21 00:00:...|        259|
+|      2014|     201401|2014-01-22 00:00:...|        209|
+|      2014|     201401|2014-01-23 00:00:...|        220|
+|      2014|     201401|2014-01-24 00:00:...|        159|
+|      2014|     201401|2014-01-25 00:00:...|        104|
+|      2014|     201401|2014-01-26 00:00:...|        154|
+|      2014|     201401|2014-01-27 00:00:...|        163|
+|      2014|     201401|2014-01-28 00:00:...|        197|
+|      2014|     201401|2014-01-29 00:00:...|        158|
+|      2014|     201401|2014-01-30 00:00:...|        254|
+|      2014|     201401|2014-01-31 00:00:...|        223|
++----------+-----------+--------------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">cube</span><span class="p">(</span>
+        <span class="n">year</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">),</span>
+        <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">),</span> 
+        <span class="s1">&#39;order_date&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;order_count&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;order_date LIKE &#39;2014-01%&#39;&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;order_year&#39;</span><span class="p">,</span> <span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="s1">&#39;order_date&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>124
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./05_basic_transformations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="13_aggregate_data_using_rollup.html" title="previous page">Aggregate data using rollup</a>
+    <a class='right-next' id="next-link" href="15_overview_of_sorting_data_frames.html" title="next page">Overview of Sorting Data Frames</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

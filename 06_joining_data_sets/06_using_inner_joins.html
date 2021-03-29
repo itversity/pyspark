@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using Inner Join &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Left or Right Outer Join" href="07_left_or_right_outer_join.html" />
+    <link rel="prev" title="Overview of Joins" href="05_overview_of_joins.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_preparing_data_sets_for_joins.html">
+     Prepare Datasets for Joins
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_analyze_data_sets_for_joins.html">
+     Analyze Datasets for Joins
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_problem_statements_for_joins.html">
+     Problem Statements for Joins
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_overview_of_joins.html">
+     Overview of Joins
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Using Inner Join
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_left_or_right_outer_join.html">
+     Left or Right Outer Join
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08_solutions_problem_1.html">
+     Solutions - Problem 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_solutions_problem_2.html">
+     Solutions - Problem 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_solutions_problem_3.html">
+     Solutions - Problem 3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11_solutions_problem_4.html">
+     Solutions - Problem 4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12_solutions_problem_5.html">
+     Solutions - Problem 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="13_solutions_problem_6.html">
+     Solutions - Problem 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="14_solutions_problem_7.html">
+     Solutions - Problem 7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="15_solutions_problem_8.html">
+     Solutions - Problem 8
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_spark_metastore/01_spark_metastore.html">
+   Spark Metastore
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/06_joining_data_sets/06_using_inner_joins.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F06_joining_data_sets/06_using_inner_joins.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/06_joining_data_sets/06_using_inner_joins.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/06_joining_data_sets/06_using_inner_joins.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="using-inner-join">
+<h1>Using Inner Join<a class="headerlink" href="#using-inner-join" title="Permalink to this headline">¶</a></h1>
+<p>Let us understand about inner join in Spark. Here are the steps we typically follow for joining data frames.</p>
+<ul class="simple">
+<li><p>Read the data sets that are supposed to be joined from files into respective data frames.</p></li>
+<li><p>Optionally we filter the data, if filter is involved as per the requirements.</p></li>
+<li><p>Join both the data sets using inner join. We will get the data satisfying the join condition in the form of a new Data Frame.</p></li>
+<li><p>Once the Data Frame with Join Results is created we can refer the columns from both the data sets after the join using the original data frame for further processing</p></li>
+</ul>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Joining Data Sets&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Read orders and order_items data sets</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="s1">&#39;/public/retail_db_json/orders&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order_items</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="s1">&#39;/public/retail_db_json/order_items&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root
+ |-- order_customer_id: long (nullable = true)
+ |-- order_date: string (nullable = true)
+ |-- order_id: long (nullable = true)
+ |-- order_status: string (nullable = true)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order_items</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root
+ |-- order_item_id: long (nullable = true)
+ |-- order_item_order_id: long (nullable = true)
+ |-- order_item_product_id: long (nullable = true)
+ |-- order_item_product_price: double (nullable = true)
+ |-- order_item_quantity: long (nullable = true)
+ |-- order_item_subtotal: double (nullable = true)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Join orders and order_items based up on the common key. In orders it is known as order_id and in order_items it is known as order_item_order_id.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method join in module pyspark.sql.dataframe:
+
+join(other, on=None, how=None) method of pyspark.sql.dataframe.DataFrame instance
+    Joins with another :class:`DataFrame`, using the given join expression.
+    
+    :param other: Right side of the join
+    :param on: a string for the join column name, a list of column names,
+        a join expression (Column), or a list of Columns.
+        If `on` is a string or a list of strings indicating the name of the join column(s),
+        the column(s) must exist on both sides, and this performs an equi-join.
+    :param how: str, default ``inner``. Must be one of: ``inner``, ``cross``, ``outer``,
+        ``full``, ``full_outer``, ``left``, ``left_outer``, ``right``, ``right_outer``,
+        ``left_semi``, and ``left_anti``.
+    
+    The following performs a full outer join between ``df1`` and ``df2``.
+    
+    &gt;&gt;&gt; df.join(df2, df.name == df2.name, &#39;outer&#39;).select(df.name, df2.height).collect()
+    [Row(name=None, height=80), Row(name=&#39;Bob&#39;, height=85), Row(name=&#39;Alice&#39;, height=None)]
+    
+    &gt;&gt;&gt; df.join(df2, &#39;name&#39;, &#39;outer&#39;).select(&#39;name&#39;, &#39;height&#39;).collect()
+    [Row(name=&#39;Tom&#39;, height=80), Row(name=&#39;Bob&#39;, height=85), Row(name=&#39;Alice&#39;, height=None)]
+    
+    &gt;&gt;&gt; cond = [df.name == df3.name, df.age == df3.age]
+    &gt;&gt;&gt; df.join(df3, cond, &#39;outer&#39;).select(df.name, df3.age).collect()
+    [Row(name=&#39;Alice&#39;, age=2), Row(name=&#39;Bob&#39;, age=5)]
+    
+    &gt;&gt;&gt; df.join(df2, &#39;name&#39;).select(df.name, df2.height).collect()
+    [Row(name=&#39;Bob&#39;, height=85)]
+    
+    &gt;&gt;&gt; df.join(df4, [&#39;name&#39;, &#39;age&#39;]).select(df.name, df.age).collect()
+    [Row(name=&#39;Bob&#39;, age=5)]
+    
+    .. versionadded:: 1.3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders_join</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">order_items</span><span class="p">,</span> 
+    <span class="n">orders</span><span class="o">.</span><span class="n">order_id</span> <span class="o">==</span> <span class="n">order_items</span><span class="o">.</span><span class="n">order_item_order_id</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders_join</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">order_items</span><span class="p">,</span> 
+    <span class="n">on</span><span class="o">=</span><span class="n">orders</span><span class="o">.</span><span class="n">order_id</span> <span class="o">==</span> <span class="n">order_items</span><span class="o">.</span><span class="n">order_item_order_id</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders_join</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">order_items</span><span class="p">,</span> 
+    <span class="n">on</span><span class="o">=</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">order_items</span><span class="p">[</span><span class="s1">&#39;order_item_order_id&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders_join</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">order_items</span><span class="p">,</span> 
+    <span class="n">on</span><span class="o">=</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">order_items</span><span class="p">[</span><span class="s1">&#39;order_item_order_id&#39;</span><span class="p">],</span>
+    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders_join</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root
+ |-- order_customer_id: long (nullable = true)
+ |-- order_date: string (nullable = true)
+ |-- order_id: long (nullable = true)
+ |-- order_status: string (nullable = true)
+ |-- order_item_id: long (nullable = true)
+ |-- order_item_order_id: long (nullable = true)
+ |-- order_item_product_id: long (nullable = true)
+ |-- order_item_product_price: double (nullable = true)
+ |-- order_item_quantity: long (nullable = true)
+ |-- order_item_subtotal: double (nullable = true)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders_join</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------------+--------------------+--------+---------------+-------------+-------------------+---------------------+------------------------+-------------------+-------------------+
+|order_customer_id|          order_date|order_id|   order_status|order_item_id|order_item_order_id|order_item_product_id|order_item_product_price|order_item_quantity|order_item_subtotal|
++-----------------+--------------------+--------+---------------+-------------+-------------------+---------------------+------------------------+-------------------+-------------------+
+|            11599|2013-07-25 00:00:...|       1|         CLOSED|            1|                  1|                  957|                  299.98|                  1|             299.98|
+|              256|2013-07-25 00:00:...|       2|PENDING_PAYMENT|            2|                  2|                 1073|                  199.99|                  1|             199.99|
+|              256|2013-07-25 00:00:...|       2|PENDING_PAYMENT|            3|                  2|                  502|                    50.0|                  5|              250.0|
+|              256|2013-07-25 00:00:...|       2|PENDING_PAYMENT|            4|                  2|                  403|                  129.99|                  1|             129.99|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|            5|                  4|                  897|                   24.99|                  2|              49.98|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|            6|                  4|                  365|                   59.99|                  5|             299.95|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|            7|                  4|                  502|                    50.0|                  3|              150.0|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|            8|                  4|                 1014|                   49.98|                  4|             199.92|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|            9|                  5|                  957|                  299.98|                  1|             299.98|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|           10|                  5|                  365|                   59.99|                  5|             299.95|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|           11|                  5|                 1014|                   49.98|                  2|              99.96|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|           12|                  5|                  957|                  299.98|                  1|             299.98|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|           13|                  5|                  403|                  129.99|                  1|             129.99|
+|             4530|2013-07-25 00:00:...|       7|       COMPLETE|           14|                  7|                 1073|                  199.99|                  1|             199.99|
+|             4530|2013-07-25 00:00:...|       7|       COMPLETE|           15|                  7|                  957|                  299.98|                  1|             299.98|
+|             4530|2013-07-25 00:00:...|       7|       COMPLETE|           16|                  7|                  926|                   15.99|                  5|              79.95|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|           17|                  8|                  365|                   59.99|                  3|             179.97|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|           18|                  8|                  365|                   59.99|                  5|             299.95|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|           19|                  8|                 1014|                   49.98|                  4|             199.92|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|           20|                  8|                  502|                    50.0|                  1|               50.0|
++-----------------+--------------------+--------+---------------+-------------+-------------------+---------------------+------------------------+-------------------+-------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68883
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order_items</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>172198
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders_join</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>172198
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Project all the fields from orders and then order_item_subtotal from order_items.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">join</span><span class="p">(</span>
+        <span class="n">order_items</span><span class="p">,</span> 
+        <span class="n">on</span><span class="o">=</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">order_items</span><span class="p">[</span><span class="s1">&#39;order_item_order_id&#39;</span><span class="p">],</span>
+        <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">order_items</span><span class="p">[</span><span class="s1">&#39;order_item_subtotal&#39;</span><span class="p">])</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------------+--------------------+--------+---------------+-------------------+
+|order_customer_id|          order_date|order_id|   order_status|order_item_subtotal|
++-----------------+--------------------+--------+---------------+-------------------+
+|            11599|2013-07-25 00:00:...|       1|         CLOSED|             299.98|
+|              256|2013-07-25 00:00:...|       2|PENDING_PAYMENT|             199.99|
+|              256|2013-07-25 00:00:...|       2|PENDING_PAYMENT|              250.0|
+|              256|2013-07-25 00:00:...|       2|PENDING_PAYMENT|             129.99|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|              49.98|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|             299.95|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|              150.0|
+|             8827|2013-07-25 00:00:...|       4|         CLOSED|             199.92|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|             299.98|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|             299.95|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|              99.96|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|             299.98|
+|            11318|2013-07-25 00:00:...|       5|       COMPLETE|             129.99|
+|             4530|2013-07-25 00:00:...|       7|       COMPLETE|             199.99|
+|             4530|2013-07-25 00:00:...|       7|       COMPLETE|             299.98|
+|             4530|2013-07-25 00:00:...|       7|       COMPLETE|              79.95|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|             179.97|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|             299.95|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|             199.92|
+|             2911|2013-07-25 00:00:...|       8|     PROCESSING|               50.0|
++-----------------+--------------------+--------+---------------+-------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Project order_id, order_date, order_status from orders and order_item_subtotal from order_items.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">join</span><span class="p">(</span>
+        <span class="n">order_items</span><span class="p">,</span> 
+        <span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">order_items</span><span class="p">[</span><span class="s1">&#39;order_item_order_id&#39;</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">orders</span><span class="o">.</span><span class="n">order_id</span><span class="p">,</span> <span class="n">orders</span><span class="o">.</span><span class="n">order_date</span><span class="p">,</span> <span class="n">orders</span><span class="o">.</span><span class="n">order_status</span><span class="p">,</span> <span class="n">order_items</span><span class="o">.</span><span class="n">order_item_subtotal</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+--------------------+---------------+-------------------+
+|order_id|          order_date|   order_status|order_item_subtotal|
++--------+--------------------+---------------+-------------------+
+|       1|2013-07-25 00:00:...|         CLOSED|             299.98|
+|       2|2013-07-25 00:00:...|PENDING_PAYMENT|             199.99|
+|       2|2013-07-25 00:00:...|PENDING_PAYMENT|              250.0|
+|       2|2013-07-25 00:00:...|PENDING_PAYMENT|             129.99|
+|       4|2013-07-25 00:00:...|         CLOSED|              49.98|
+|       4|2013-07-25 00:00:...|         CLOSED|             299.95|
+|       4|2013-07-25 00:00:...|         CLOSED|              150.0|
+|       4|2013-07-25 00:00:...|         CLOSED|             199.92|
+|       5|2013-07-25 00:00:...|       COMPLETE|             299.98|
+|       5|2013-07-25 00:00:...|       COMPLETE|             299.95|
+|       5|2013-07-25 00:00:...|       COMPLETE|              99.96|
+|       5|2013-07-25 00:00:...|       COMPLETE|             299.98|
+|       5|2013-07-25 00:00:...|       COMPLETE|             129.99|
+|       7|2013-07-25 00:00:...|       COMPLETE|             199.99|
+|       7|2013-07-25 00:00:...|       COMPLETE|             299.98|
+|       7|2013-07-25 00:00:...|       COMPLETE|              79.95|
+|       8|2013-07-25 00:00:...|     PROCESSING|             179.97|
+|       8|2013-07-25 00:00:...|     PROCESSING|             299.95|
+|       8|2013-07-25 00:00:...|     PROCESSING|             199.92|
+|       8|2013-07-25 00:00:...|     PROCESSING|               50.0|
++--------+--------------------+---------------+-------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span> \
+    <span class="n">join</span><span class="p">(</span>
+        <span class="n">order_items</span><span class="p">,</span> 
+        <span class="n">on</span><span class="o">=</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">order_items</span><span class="p">[</span><span class="s1">&#39;order_item_order_id&#39;</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span> \
+    <span class="n">select</span><span class="p">(</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">],</span> <span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_date&#39;</span><span class="p">],</span> <span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_status&#39;</span><span class="p">],</span> <span class="n">order_items</span><span class="p">[</span><span class="s1">&#39;order_item_subtotal&#39;</span><span class="p">])</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+--------------------+---------------+-------------------+
+|order_id|          order_date|   order_status|order_item_subtotal|
++--------+--------------------+---------------+-------------------+
+|       1|2013-07-25 00:00:...|         CLOSED|             299.98|
+|       2|2013-07-25 00:00:...|PENDING_PAYMENT|             199.99|
+|       2|2013-07-25 00:00:...|PENDING_PAYMENT|              250.0|
+|       2|2013-07-25 00:00:...|PENDING_PAYMENT|             129.99|
+|       4|2013-07-25 00:00:...|         CLOSED|              49.98|
+|       4|2013-07-25 00:00:...|         CLOSED|             299.95|
+|       4|2013-07-25 00:00:...|         CLOSED|              150.0|
+|       4|2013-07-25 00:00:...|         CLOSED|             199.92|
+|       5|2013-07-25 00:00:...|       COMPLETE|             299.98|
+|       5|2013-07-25 00:00:...|       COMPLETE|             299.95|
+|       5|2013-07-25 00:00:...|       COMPLETE|              99.96|
+|       5|2013-07-25 00:00:...|       COMPLETE|             299.98|
+|       5|2013-07-25 00:00:...|       COMPLETE|             129.99|
+|       7|2013-07-25 00:00:...|       COMPLETE|             199.99|
+|       7|2013-07-25 00:00:...|       COMPLETE|             299.98|
+|       7|2013-07-25 00:00:...|       COMPLETE|              79.95|
+|       8|2013-07-25 00:00:...|     PROCESSING|             179.97|
+|       8|2013-07-25 00:00:...|     PROCESSING|             299.95|
+|       8|2013-07-25 00:00:...|     PROCESSING|             199.92|
+|       8|2013-07-25 00:00:...|     PROCESSING|               50.0|
++--------+--------------------+---------------+-------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./06_joining_data_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="05_overview_of_joins.html" title="previous page">Overview of Joins</a>
+    <a class='right-next' id="next-link" href="07_left_or_right_outer_join.html" title="next page">Left or Right Outer Join</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

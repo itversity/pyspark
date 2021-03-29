@@ -1,0 +1,905 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creating Partitioned Tables &#8212; Mastering Pyspark</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Saving as Partitioned Tables" href="10_saving_as_partitioned_tables-Copy1.html" />
+    <link rel="prev" title="Read and Process data from Metastore Tables" href="08_read_and_process_data_from_metastore_tables.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Mastering Pyspark</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mastering-pyspark.html">
+   Mastering Pyspark
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_getting_started_pyspark/01_getting_started_pyspark.html">
+   Getting Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_quick_recap_of_python/01_quick_recap_of_python.html">
+   Quick Recap of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_data_processing_overview/01_data_processing_overview.html">
+   Data Processing - Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_processing_column_data/01_processing_column_data.html">
+   Processing Column Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_basic_transformations/01_basic_transformations.html">
+   Basic Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_joining_data_sets/01_joining_data_sets.html">
+   Joining Data Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_windowing_functions/01_windowing_functions.html">
+   Windowing Functions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="01_spark_metastore.html">
+   Spark Metastore
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_overview_of_spark_metastore.html">
+     Overview of Spark Metastore
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_exploring_spark_catalog.html">
+     Exploring Spark Catalog
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_creating_metastore_tables_using_catalog.html">
+     Creating Metastore Tables using catalog
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_inferring_schema_for_tables.html">
+     Inferring Schema for Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_define_schema_for_tables_using_structtype.html">
+     Define Schema for Tables using StructType
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_inserting_into_existing_tables.html">
+     Inserting into Existing Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08_read_and_process_data_from_metastore_tables.html">
+     Read and Process data from Metastore Tables
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Creating Partitioned Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_saving_as_partitioned_tables-Copy1.html">
+     Saving as Partitioned Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11_creating_temp_views.html">
+     Creating Temp Views
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12_using_spark_sql.html">
+     Using Spark SQL
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Subscribe to our <a href="http://notifyme.itversity.com">Newsletter</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/08_spark_metastore/09_creating_partitioned_tables.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/itversity/pyspark"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/itversity/pyspark/issues/new?title=Issue%20on%20page%20%2F08_spark_metastore/09_creating_partitioned_tables.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/itversity/pyspark/edit/master/08_spark_metastore/09_creating_partitioned_tables.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/itversity/pyspark/master?urlpath=tree/08_spark_metastore/09_creating_partitioned_tables.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tasks">
+   Tasks
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="creating-partitioned-tables">
+<h1>Creating Partitioned Tables<a class="headerlink" href="#creating-partitioned-tables" title="Permalink to this headline">¶</a></h1>
+<p>We can also create partitioned tables as part of Spark Metastore Tables.</p>
+<ul class="simple">
+<li><p>There are some challenges in creating partitioned tables directly using <code class="docutils literal notranslate"><span class="pre">spark.catalog.createTable</span></code>.</p></li>
+<li><p>But if the directories are similar to partitioned tables with data, we should be able to create partitioned tables.</p></li>
+<li><p>Let us create partitioned table for <code class="docutils literal notranslate"><span class="pre">orders</span></code> by <code class="docutils literal notranslate"><span class="pre">order_month</span></code>.</p></li>
+</ul>
+<p>Let us start spark context for this Notebook so that we can execute the code provided. You can sign up for our <a class="reference external" href="https://labs.itversity.com/plans">10 node state of the art cluster/labs</a> to learn Spark SQL using our unique integrated LMS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span> \
+    <span class="n">builder</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s1">&#39;spark.ui.port&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.warehouse.dir&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/warehouse&quot;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">appName</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> | Python - Spark Metastore&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">master</span><span class="p">(</span><span class="s1">&#39;yarn&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are going to use CLIs, you can use Spark SQL using one of the 3 approaches.</p>
+<p><strong>Using Spark SQL</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-sql \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Scala</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>spark2-shell \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<p><strong>Using Pyspark</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pyspark2 \
+    --master yarn \
+    --conf spark.ui.port=0 \
+    --conf spark.sql.warehouse.dir=/user/${USER}/warehouse
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;spark.sql.shuffle.partitions&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
+<p>Let us perform tasks related to partitioned tables.</p>
+<ul class="simple">
+<li><p>Read data from file into data frame.</p></li>
+<li><p>Add additional column which will be used to partition the data.</p></li>
+<li><p>Write the data into the target location on which we are going to create the table.</p></li>
+<li><p>Create partitioned table using the location to which we have copied the data and validate.</p></li>
+<li><p>We can recover partitions by running <code class="docutils literal notranslate"><span class="pre">MSCK</span> <span class="pre">REPAIR</span> <span class="pre">TABLE</span></code> using <code class="docutils literal notranslate"><span class="pre">spark.sql</span></code> or by invoking <code class="docutils literal notranslate"><span class="pre">spark.catalog.recoverPartitions</span></code>.</p></li>
+<li><p>When we use <code class="docutils literal notranslate"><span class="pre">createTable</span></code> to create partitioned table, we have to recover partitions so that partitions are visible.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">getpass</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CREATE DATABASE IF NOT EXISTS </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_retail&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border='1'>
+<tr><th></th></tr>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">setCurrentDatabase</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">_retail&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">currentDatabase</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;itversity_retail&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders_path</span> <span class="o">=</span> <span class="s1">&#39;/public/retail_db/orders&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -ls /public/retail_db/orders
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 1 items
+-rw-r--r--   2 hdfs supergroup    2999944 2021-01-28 09:27 /public/retail_db/orders/part-00000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">&#39;DROP TABLE IF EXISTS orders_part&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border='1'>
+<tr><th></th></tr>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -ls /user/`whoami`/retail_db/orders_part
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 14 items
+-rw-r--r--   3 itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/_SUCCESS
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201307
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201308
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201309
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201310
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201311
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201312
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201401
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201402
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201403
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201404
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201405
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201406
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:25 /user/itversity/retail_db/orders_part/order_month=201407
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -rm -R -skipTrash /user/`whoami`/retail_db/orders_part
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-03-13 15:31:04,403 INFO fs.TrashPolicyDefault: Moved: &#39;hdfs://m01.itversity.com:9000/user/itversity/retail_db/orders_part&#39; to trash at: hdfs://m01.itversity.com:9000/user/itversity/.Trash/Current/user/itversity/retail_db/orders_part1615667464378
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">date_format</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span> \
+    <span class="n">read</span><span class="o">.</span> \
+    <span class="n">csv</span><span class="p">(</span><span class="n">orders_path</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;order_id INT, order_date DATE,</span>
+<span class="s1">                  order_customer_id INT, order_status STRING</span>
+<span class="s1">               &#39;&#39;&#39;</span>
+       <span class="p">)</span><span class="o">.</span> \
+    <span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">,</span> <span class="n">date_format</span><span class="p">(</span><span class="s1">&#39;order_date&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyMM&#39;</span><span class="p">))</span><span class="o">.</span> \
+    <span class="n">write</span><span class="o">.</span> \
+    <span class="n">partitionBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/retail_db/orders_part&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -ls /user/`whoami`/retail_db/orders_part
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 14 items
+-rw-r--r--   3 itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/_SUCCESS
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201307
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201308
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201309
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201310
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201311
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201312
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201401
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201402
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201403
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201404
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201405
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201406
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201407
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sh</span>
+
+hdfs dfs -ls -R /user/`whoami`/retail_db/orders_part
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-rw-r--r--   3 itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/_SUCCESS
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201307
+-rw-r--r--   3 itversity itversity      14435 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201307/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201308
+-rw-r--r--   3 itversity itversity      49997 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201308/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201309
+-rw-r--r--   3 itversity itversity      51358 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201309/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201310
+-rw-r--r--   3 itversity itversity      47051 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201310/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201311
+-rw-r--r--   3 itversity itversity      55949 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201311/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201312
+-rw-r--r--   3 itversity itversity      51794 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201312/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201401
+-rw-r--r--   3 itversity itversity      51938 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201401/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201402
+-rw-r--r--   3 itversity itversity      49591 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201402/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201403
+-rw-r--r--   3 itversity itversity      50816 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201403/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201404
+-rw-r--r--   3 itversity itversity      49799 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201404/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201405
+-rw-r--r--   3 itversity itversity      48183 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201405/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201406
+-rw-r--r--   3 itversity itversity      46828 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201406/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+drwxr-xr-x   - itversity itversity          0 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201407
+-rw-r--r--   3 itversity itversity      39605 2021-03-13 15:31 /user/itversity/retail_db/orders_part/order_month=201407/part-00000-ccc05948-3707-47fe-9855-f041cd350b7e.c000.snappy.parquet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span> \
+    <span class="n">read</span><span class="o">.</span> \
+    <span class="n">parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/retail_db/orders_part/order_month=201308&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+----------+-----------------+---------------+
+|order_id|order_date|order_customer_id|   order_status|
++--------+----------+-----------------+---------------+
+|    1297|2013-08-01|            11607|       COMPLETE|
+|    1298|2013-08-01|             5105|         CLOSED|
+|    1299|2013-08-01|             7802|       COMPLETE|
+|    1300|2013-08-01|              553|PENDING_PAYMENT|
+|    1301|2013-08-01|             1604|PENDING_PAYMENT|
+|    1302|2013-08-01|             1695|       COMPLETE|
+|    1303|2013-08-01|             7018|     PROCESSING|
+|    1304|2013-08-01|             2059|       COMPLETE|
+|    1305|2013-08-01|             3844|       COMPLETE|
+|    1306|2013-08-01|            11672|PENDING_PAYMENT|
+|    1307|2013-08-01|             4474|       COMPLETE|
+|    1308|2013-08-01|            11645|        PENDING|
+|    1309|2013-08-01|             2367|         CLOSED|
+|    1310|2013-08-01|             5602|        PENDING|
+|    1311|2013-08-01|             5396|PENDING_PAYMENT|
+|    1312|2013-08-01|            12291|       COMPLETE|
+|    1313|2013-08-01|             3471|       CANCELED|
+|    1314|2013-08-01|            10993|       COMPLETE|
+|    1315|2013-08-01|             5660|       COMPLETE|
+|    1316|2013-08-01|             6376|PENDING_PAYMENT|
++--------+----------+-----------------+---------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span> \
+    <span class="n">read</span><span class="o">.</span> \
+    <span class="n">parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/retail_db/orders_part&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+----------+-----------------+---------------+-----------+
+|order_id|order_date|order_customer_id|   order_status|order_month|
++--------+----------+-----------------+---------------+-----------+
+|   15488|2013-11-01|             8987|PENDING_PAYMENT|     201311|
+|   15489|2013-11-01|             5359|PENDING_PAYMENT|     201311|
+|   15490|2013-11-01|            10149|       COMPLETE|     201311|
+|   15491|2013-11-01|            10635|        ON_HOLD|     201311|
+|   15492|2013-11-01|             7784|PENDING_PAYMENT|     201311|
+|   15493|2013-11-01|             1104|        ON_HOLD|     201311|
+|   15494|2013-11-01|             7313|     PROCESSING|     201311|
+|   15495|2013-11-01|             7067|         CLOSED|     201311|
+|   15496|2013-11-01|            12153|PENDING_PAYMENT|     201311|
+|   15497|2013-11-01|            11115|PENDING_PAYMENT|     201311|
+|   15498|2013-11-01|            11195|       COMPLETE|     201311|
+|   15499|2013-11-01|             7113|         CLOSED|     201311|
+|   15500|2013-11-01|             6780|PENDING_PAYMENT|     201311|
+|   15501|2013-11-01|             9703|        ON_HOLD|     201311|
+|   15502|2013-11-01|            10009|       COMPLETE|     201311|
+|   15503|2013-11-01|             6521|PENDING_PAYMENT|     201311|
+|   15504|2013-11-01|            10601|PENDING_PAYMENT|     201311|
+|   15505|2013-11-01|             1068|PENDING_PAYMENT|     201311|
+|   15506|2013-11-01|             2742|PENDING_PAYMENT|     201311|
+|   15507|2013-11-01|             3503|       COMPLETE|     201311|
++--------+----------+-----------------+---------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span> \
+    <span class="n">catalog</span><span class="o">.</span> \
+    <span class="n">createTable</span><span class="p">(</span><span class="s1">&#39;orders_part&#39;</span><span class="p">,</span>
+                <span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/user/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/retail_db/orders_part&#39;</span><span class="p">,</span>
+                <span class="n">source</span><span class="o">=</span><span class="s1">&#39;parquet&#39;</span>
+               <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border='1'>
+<tr><th>order_id</th><th>order_date</th><th>order_customer_id</th><th>order_status</th><th>order_month</th></tr>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;orders_part&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+----------+-----------------+------------+-----------+
+|order_id|order_date|order_customer_id|order_status|order_month|
++--------+----------+-----------------+------------+-----------+
++--------+----------+-----------------+------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">&#39;SHOW PARTITIONS orders_part&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+
+|partition|
++---------+
++---------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">recoverPartitions</span><span class="p">(</span><span class="s1">&#39;orders_part&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">&#39;SHOW PARTITIONS orders_part&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+------------------+
+|         partition|
++------------------+
+|order_month=201307|
+|order_month=201308|
+|order_month=201309|
+|order_month=201310|
+|order_month=201311|
+|order_month=201312|
+|order_month=201401|
+|order_month=201402|
+|order_month=201403|
+|order_month=201404|
+|order_month=201405|
+|order_month=201406|
+|order_month=201407|
++------------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;orders_part&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+----------+-----------------+---------------+-----------+
+|order_id|order_date|order_customer_id|   order_status|order_month|
++--------+----------+-----------------+---------------+-----------+
+|   15488|2013-11-01|             8987|PENDING_PAYMENT|     201311|
+|   15489|2013-11-01|             5359|PENDING_PAYMENT|     201311|
+|   15490|2013-11-01|            10149|       COMPLETE|     201311|
+|   15491|2013-11-01|            10635|        ON_HOLD|     201311|
+|   15492|2013-11-01|             7784|PENDING_PAYMENT|     201311|
+|   15493|2013-11-01|             1104|        ON_HOLD|     201311|
+|   15494|2013-11-01|             7313|     PROCESSING|     201311|
+|   15495|2013-11-01|             7067|         CLOSED|     201311|
+|   15496|2013-11-01|            12153|PENDING_PAYMENT|     201311|
+|   15497|2013-11-01|            11115|PENDING_PAYMENT|     201311|
+|   15498|2013-11-01|            11195|       COMPLETE|     201311|
+|   15499|2013-11-01|             7113|         CLOSED|     201311|
+|   15500|2013-11-01|             6780|PENDING_PAYMENT|     201311|
+|   15501|2013-11-01|             9703|        ON_HOLD|     201311|
+|   15502|2013-11-01|            10009|       COMPLETE|     201311|
+|   15503|2013-11-01|             6521|PENDING_PAYMENT|     201311|
+|   15504|2013-11-01|            10601|PENDING_PAYMENT|     201311|
+|   15505|2013-11-01|             1068|PENDING_PAYMENT|     201311|
+|   15506|2013-11-01|             2742|PENDING_PAYMENT|     201311|
+|   15507|2013-11-01|             3503|       COMPLETE|     201311|
++--------+----------+-----------------+---------------+-----------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">&#39;SELECT order_month, count(1) FROM orders_part GROUP BY order_month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+--------+
+|order_month|count(1)|
++-----------+--------+
+|     201405|    5467|
+|     201311|    6381|
+|     201401|    5908|
+|     201309|    5841|
+|     201308|    5680|
+|     201404|    5657|
+|     201402|    5635|
+|     201310|    5335|
+|     201406|    5308|
+|     201407|    4468|
+|     201307|    1533|
+|     201312|    5892|
+|     201403|    5778|
++-----------+--------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;orders_part&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">groupBy</span><span class="p">(</span><span class="s1">&#39;order_month&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">count</span><span class="p">()</span><span class="o">.</span> \
+    <span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----------+-----+
+|order_month|count|
++-----------+-----+
+|     201311| 6381|
+|     201401| 5908|
+|     201309| 5841|
+|     201308| 5680|
+|     201404| 5657|
+|     201405| 5467|
+|     201312| 5892|
+|     201403| 5778|
+|     201402| 5635|
+|     201310| 5335|
+|     201406| 5308|
+|     201407| 4468|
+|     201307| 1533|
++-----------+-----+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark2"
+        },
+        kernelOptions: {
+            kernelName: "pyspark2",
+            path: "./08_spark_metastore"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark2'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="08_read_and_process_data_from_metastore_tables.html" title="previous page">Read and Process data from Metastore Tables</a>
+    <a class='right-next' id="next-link" href="10_saving_as_partitioned_tables-Copy1.html" title="next page">Saving as Partitioned Tables</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Durga Gadiraju<br/>
+        
+            &copy; Copyright ITVersity, Inc.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
