@@ -1,33 +1,140 @@
-- file: cca175_intro
-  numbered: true
+file: mastering-pyspark
 
-- part: Apache Spark using Python
-  chapters:
-  - file: spark-python/01_getting_started
-  - file: spark-python/02_quick_recap_of_python
-  - file: spark-python/03_data_processing_overview
-  - file: spark-python/04_processing_column_data
-  - file: spark-python/05_basic_transformations
-  - file: spark-python/06_joining_data_sets
-  - file: spark-python/07_windowing_functions
-  - file: spark-python/08_spark_metastore
-  
-- part: Apache Spark using Scala
-  chapters:
-  - file: spark-scala/01_getting_started
-  - file: spark-scala/02_quick_recap_of_scala
-  - file: spark-scala/03_data_processing_overview
-  - file: spark-scala/04_processing_column_data
-  - file: spark-scala/05_basic_transformations
-  - file: spark-scala/06_joining_data_sets
-  - file: spark-scala/07_windowing_functions
-  - file: spark-scala/08_spark_metastore
+sections:
 
-- part: Apache Spark using SQL
-  chapters:
-    - file: spark-sql/01_getting_started
-    - file: spark-sql/02_basic_transformations
-    - file: spark-sql/03_basic_ddl_and_dml
-    - file: spark-sql/04_dml_and_partitioning
-    - file: spark-sql/05_predefined_functions
-    - file: spark-sql/06_windowing_functions
+- file: 01_getting_started_pyspark/01_getting_started_pyspark
+  sections:
+  - file: 01_getting_started_pyspark/01_getting_started_pyspark
+  - file: 01_getting_started_pyspark/02_platforms_to_practice
+  - file: 01_getting_started_pyspark/03_setup_spark_locally_windows
+  - file: 01_getting_started_pyspark/04_setup_spark_locally_mac
+  - file: 01_getting_started_pyspark/05_setup_spark_locally_ubuntu
+  - file: 01_getting_started_pyspark/06_using_itversity_labs
+  - file: 01_getting_started_pyspark/07_using_google_colab
+  - file: 01_getting_started_pyspark/08_overview_of_filesystems
+  - file: 01_getting_started_pyspark/09_different_spark_modules
+  - file: 01_getting_started_pyspark/10_spark_cluster_manager_types
+  - file: 01_getting_started_pyspark/11_launching_pyspark_cli
+  - file: 01_getting_started_pyspark/12_using_jupyter_lab_interface
+  - file: 01_getting_started_pyspark/13_word_count_using_spark
+
+- file: 02_quick_recap_of_python/01_quick_recap_of_python
+  sections:
+  - file: 02_quick_recap_of_python/01_quick_recap_of_python
+  - file: 02_quick_recap_of_python/02_data_engineering_life_cycle
+  - file: 02_quick_recap_of_python/03_getting_started_python_and_pip
+  - file: 02_quick_recap_of_python/04_python_cli_or_jupyter_notebook
+  - file: 02_quick_recap_of_python/05_basic_programming_constructs
+  - file: 02_quick_recap_of_python/06_developing_functions
+  - file: 02_quick_recap_of_python/07_lambda_functions
+  - file: 02_quick_recap_of_python/08_overview_of_collections
+  - file: 02_quick_recap_of_python/09_overview_of_pandas_dataframes
+  - file: 02_quick_recap_of_python/10_limitations_of_pandas
+  - file: 02_quick_recap_of_python/11_development_life_cycle
+  - file: 02_quick_recap_of_python/12_exercises_recap_of_python
+
+- file: 03_data_processing_overview/01_data_processing_overview
+  sections:
+  - file: 03_data_processing_overview/01_data_processing_overview
+  - file: 03_data_processing_overview/02_prerequisites_and_objectives
+  - file: 03_data_processing_overview/03_starting_spark_context
+  - file: 03_data_processing_overview/04_overview_of_spark_read_apis
+  - file: 03_data_processing_overview/05_understand_airlines_data
+  - file: 03_data_processing_overview/06_inferring_schema
+  - file: 03_data_processing_overview/07_previewing_airlines_data
+  - file: 03_data_processing_overview/08_overview_of_dataframe_apis
+  - file: 03_data_processing_overview/09_overview_of_functions
+  - file: 03_data_processing_overview/10_overview_of_spark_write_apis
+  - file: 03_data_processing_overview/11_reorganizing_airlines_data
+  - file: 03_data_processing_overview/12_previewing_reorganized_data
+  - file: 03_data_processing_overview/13_analyze_and_understand_data
+  - file: 03_data_processing_overview/14_conclusion_data_processing_overview
+
+- file: 04_processing_column_data/01_processing_column_data
+  sections:
+  - file: 04_processing_column_data/01_processing_column_data
+  - file: 04_processing_column_data/02_predefined_functions
+  - file: 04_processing_column_data/03_create_dummy_dataframes
+  - file: 04_processing_column_data/04_categories_of_functions
+  - file: 04_processing_column_data/05_special_functions_col_and_lit
+  - file: 04_processing_column_data/06_common_string_manipulation_functions
+  - file: 04_processing_column_data/07_extracting_strings_using_substring
+  - file: 04_processing_column_data/08_extracting_strings_using_split
+  - file: 04_processing_column_data/09_padding_characters_around_strings
+  - file: 04_processing_column_data/10_trimming_characters_from_strings
+  - file: 04_processing_column_data/11_date_and_time_manipulation_functions
+  - file: 04_processing_column_data/12_date_and_time_arithmetic
+  - file: 04_processing_column_data/13_using_date_and_time_trunc_functions
+  - file: 04_processing_column_data/14_date_and_time_extract_functions
+  - file: 04_processing_column_data/15_using_to_date_and_to_timestamp
+  - file: 04_processing_column_data/16_using_date_format_function
+  - file: 04_processing_column_data/17_dealing_with_unix_timestamp
+  - file: 04_processing_column_data/18_dealing_with_nulls
+  - file: 04_processing_column_data/19_using_case_and_when
+  - file: 04_processing_column_data/20_conclusion_predefined_functions
+  - file: 04_processing_column_data/21_exercises_predefined_functions
+
+- file: 05_basic_transformations/01_basic_transformations
+  sections:
+  - file: 05_basic_transformations/01_basic_transformations
+  - file: 05_basic_transformations/02_overview_of_basic_transformations
+  - file: 05_basic_transformations/03_data_frame_for_basic_transformations
+  - file: 05_basic_transformations/04_basic_filtering_of_data
+  - file: 05_basic_transformations/05_filtering_example_using_dates
+  - file: 05_basic_transformations/06_boolean_operators
+  - file: 05_basic_transformations/07_using_in_operator_or_isin_function
+  - file: 05_basic_transformations/08_using_like_operator_or_function
+  - file: 05_basic_transformations/09_using_between_operator
+  - file: 05_basic_transformations/10_dealing_with_nulls_while_filtering
+  - file: 05_basic_transformations/11_total_aggregations
+  - file: 05_basic_transformations/12_aggregate_data_using_groupby
+  - file: 05_basic_transformations/13_aggregate_data_using_rollup
+  - file: 05_basic_transformations/14_aggregate_data_using_cube
+  - file: 05_basic_transformations/15_overview_of_sorting_data_frames
+  - file: 05_basic_transformations/16_solution_problem_1
+  - file: 05_basic_transformations/17_solution_problem_2
+  - file: 05_basic_transformations/18_solution_problem_3
+
+- file: 06_joining_data_sets/01_joining_data_sets
+  sections:
+  - file: 06_joining_data_sets/01_joining_data_sets
+  - file: 06_joining_data_sets/02_preparing_data_sets_for_joins
+  - file: 06_joining_data_sets/03_analyze_data_sets_for_joins
+  - file: 06_joining_data_sets/04_problem_statements_for_joins
+  - file: 06_joining_data_sets/05_overview_of_joins
+  - file: 06_joining_data_sets/06_using_inner_joins
+  - file: 06_joining_data_sets/07_left_or_right_outer_join
+  - file: 06_joining_data_sets/08_solutions_problem_1
+  - file: 06_joining_data_sets/09_solutions_problem_2
+  - file: 06_joining_data_sets/10_solutions_problem_3
+  - file: 06_joining_data_sets/11_solutions_problem_4
+  - file: 06_joining_data_sets/12_solutions_problem_5
+  - file: 06_joining_data_sets/13_solutions_problem_6
+  - file: 06_joining_data_sets/14_solutions_problem_7
+  - file: 06_joining_data_sets/15_solutions_problem_8
+
+- file: 07_windowing_functions/01_windowing_functions
+  sections:
+  - file: 07_windowing_functions/01_windowing_functions
+  - file: 07_windowing_functions/02_overview_of_windowing_functions
+  - file: 07_windowing_functions/03_aggregate_functions
+  - file: 07_windowing_functions/04_using_rowsBetween_and_rangeBetween
+  - file: 07_windowing_functions/05_ranking_functions
+  - file: 07_windowing_functions/06_using_lead_or_lag
+  - file: 07_windowing_functions/07_using_first_and_last_functions
+  - file: 07_windowing_functions/10_aggregate_functions_examples
+
+- file: 08_spark_metastore/01_spark_metastore
+  sections:
+  - file: 08_spark_metastore/01_spark_metastore
+  - file: 08_spark_metastore/02_overview_of_spark_metastore
+  - file: 08_spark_metastore/03_exploring_spark_catalog
+  - file: 08_spark_metastore/04_creating_metastore_tables_using_catalog
+  - file: 08_spark_metastore/05_inferring_schema_for_tables
+  - file: 08_spark_metastore/06_define_schema_for_tables_using_structtype
+  - file: 08_spark_metastore/07_inserting_into_existing_tables
+  - file: 08_spark_metastore/08_read_and_process_data_from_metastore_tables
+  - file: 08_spark_metastore/09_creating_partitioned_tables
+  - file: 08_spark_metastore/10_saving_as_partitioned_tables-Copy1
+  - file: 08_spark_metastore/11_creating_temp_views
+  - file: 08_spark_metastore/12_using_spark_sql
